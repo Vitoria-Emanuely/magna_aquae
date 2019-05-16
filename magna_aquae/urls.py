@@ -25,7 +25,7 @@ Entorno_Listar, Entorno_Add, Entorno_Edit, Entorno_Delete, Imagem_Listar, Imagem
 Monitoramento_Localizacao, Monitoramento_Imagem, Monitoramento_Entorno, Monitoramento_Solucao, Historico_Listar, Historico_Detalhes
 from django.contrib.auth.decorators import login_required
 
-login_template = '/login'
+login_template = '/'
 
 urlpatterns = [
     #admin

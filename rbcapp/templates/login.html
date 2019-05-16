@@ -35,30 +35,28 @@
                 {% endif %}
 
                 {% csrf_token %}
-
-                <div class="field">
-                    <label>Usuário</label>
-
-                    <div class="ui corner labeled input">
-                        <input type="text" name="login" required>
-                        <div class="ui corner label">
-                            <i class="asterisk icon"></i>
+                <div class="ui grid">
+                    <div class="field eight wide">
+                        <label>Usuário</label>
+                        <div class="ui corner labeled input">
+                            <input type="text" name="login" required>
+                            <div class="ui corner label">
+                                <i class="asterisk icon"></i>
+                            </div>
                         </div>
                     </div>
 
-                </div>
-
-                <div class="field">
-                    <label>Senha</label>
-                    <div class="ui corner labeled input">
-                        <input type="password" name="senha" required>
-
-                        <div class="ui corner label">
-                            <i class="asterisk icon"></i>
+                    <div class="field eight wide">
+                        <label>Senha</label>
+                        <div class="ui corner labeled input">
+                            <input type="password" name="senha" required>
+                            <div class="ui corner label">
+                                <i class="asterisk icon"></i>
+                            </div>
                         </div>
                     </div>
-
                 </div>
+
                 <div class="actions">
                     <div class="ui deny button">
                         Cancelar

@@ -5,6 +5,7 @@
     </div>
 
     <form method="POST" action="{% url 'bacia_hidrografica_add' %}" class="ui content form">
+        <input type="hidden" name="teste" value="{{ teste }}">
 
         {% csrf_token %}
 

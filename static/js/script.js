@@ -148,4 +148,10 @@ $(document).ready(function () {
     $("body").on("click", ".excluirImagem", function () {
         $('.modalExcluirImagem').modal('show');
     });
+
+    //sobre
+
+    $("body").on("click", ".sobre", function () {
+        $('.modalSobre').modal('show');
+    });
 });

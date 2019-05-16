@@ -8,64 +8,58 @@
 
         {% csrf_token %}
 
-        <div class="field">
-            <label>Classificação IAP</label>
-
-            <div class="ui corner labeled input">
-                {{ form.iap }}
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Classificação IAP</label>
+                <div class="ui corner labeled input">
+                    {{ form.iap }}
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
 
+            <div class="field eight wide">
+                <label>Classificação IVA</label>
+                <div class="ui corner labeled input">
+                    {{ form.iva }}
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="field">
-            <label>Classificação IVA</label>
-
-            <div class="ui corner labeled input">
-                {{ form.iva }}
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Entorno</label>
+                <div class="ui corner labeled input">
+                    {{ form.entorno }}
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="field">
-            <label>Entorno</label>
-
-            <div class="ui corner labeled input">
-                {{ form.entorno }}
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+            <div class="field eight wide">
+                <label>Risco</label>
+                <div class="ui corner labeled input">
+                    {{ form.risco }}
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="field">
-            <label>Risco</label>
-
-            <div class="ui corner labeled input">
-                {{ form.risco }}
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="field">
+        <div class="field space">
             <label>Solução Sugerida</label>
-
             <div class="ui corner labeled input">
                 {{ form.solucao_sugerida }}
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>
             </div>
-
         </div>
 
         <div class="actions">
@@ -75,6 +69,5 @@
             <input type="submit" class="ui right teal button" value="Cadastrar"/>
         </div>
     </form>
-
 
 </div>

@@ -50,7 +50,10 @@
                         </div>
                     </div>
                 </h3>
+
+
                 <form action="{% url 'monitoramento_localizacao' %}" method="POST">
+
                     {% csrf_token %}
                     <div class="ui secondary segment large form formMonitoramento">
 
@@ -63,6 +66,9 @@
                                         <option value="{{ bh.id }}">{{ bh.nome }}</option>
                                     {% endfor %}
                                 </select>
+                                <a class="ui labeled icon button adicionarBacia">
+                                    <i class="icon add"></i>
+                                </a>
                             </div>
                             <div class="field">
                                 <label>Selecionar Rio</label>
@@ -78,7 +84,6 @@
                                         disabled="True" required="True">
                                     <option value="selecione">Selecione primeiro um rio</option>
                                 </select>
-
                             </div>
 
                             <div class="field">
@@ -87,7 +92,6 @@
                                     <option value="selecione">Selecione primeiro um ponto</option>
                                 </select>
                             </div>
-
                         </div>
 
                     </div>
@@ -97,22 +101,26 @@
                             <i class="left arrow icon"></i>
                             Voltar
                         </a>
-
                         <button type="submit" class="ui right labeled icon botaoProximo button botao" disabled>
                             <i class="right arrow icon"></i>
                             Próximo Passo
                         </button>
                     </div>
+
                 </form>
 
 
-
-        </div>
+            </div>
 
 
         </div>
 
 
     </article>
+
+    {% include 'bacia_hidrografica/modalAdicionarBacia.html' %}
+    {% include 'rio/modalAdicionarRio.html' %}
+    {% include 'ponto/modalAdicionarPonto.html' %}
+    {% include 'coleta/modalAdicionarColeta.html' %}
 
 {% endblock %}

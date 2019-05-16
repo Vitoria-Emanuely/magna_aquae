@@ -42,8 +42,10 @@ class Bacia_Hidrografica_Add(View):
             bh = Bacia_Hidrografica()
             bh.nome = request.POST['nome']
             bh.save()
-        return redirect('bacia_hidrografica_listar')
-
+        if request.POST['teste'] == "null":
+            return redirect('monitoramento_localizacao')
+        else:
+            return redirect('bacia_hidrografica_listar')
 
 class Bacia_Hidrografica_Edit(View):
     def get(self, request):

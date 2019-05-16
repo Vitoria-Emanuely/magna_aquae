@@ -8,41 +8,38 @@
 
         {% csrf_token %}
 
-        <div class="field">
-            <label>Latitude</label>
-
-            <div class="ui corner labeled input">
-                <input name="latitude" id="ponto_lat" pattern="(\d+\.\-?)+" required="True" title="Apenas números, - e ." type="text">
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Latitude</label>
+                <div class="ui corner labeled input">
+                    <input name="latitude" id="ponto_lat" pattern="(\d+\.\-?)+" required="True"
+                           title="Apenas números, - e ." type="text">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="field">
-            <label>Longitude</label>
-
-            <div class="ui corner labeled input">
-                <input name="longitude" id="ponto_lon" pattern="(\d+\.\-?)+" required="True" title="Apenas números, - e ." type="text">
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+            <div class="field eight wide">
+                <label>Longitude</label>
+                <div class="ui corner labeled input">
+                    <input name="longitude" id="ponto_lon" pattern="(\d+\.\-?)+" required="True"
+                           title="Apenas números, - e ." type="text">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="field">
+        <div class="field space">
             <label>Rio</label>
-
             <div class="ui corner labeled input">
-
                 <input name="rio" id="ponto_rio" disabled="True"/>
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>
             </div>
-
         </div>
 
         <input type="hidden" name="ponto_id" id="id_ponto"/>
@@ -52,9 +49,8 @@
                 Cancelar
             </div>
             <input type="submit" class="ui right teal button" value="Editar"/>
-        </input>
+            </input>
         </div>
     </form>
-
 
 </div>

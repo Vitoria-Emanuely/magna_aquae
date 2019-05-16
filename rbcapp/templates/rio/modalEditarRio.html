@@ -8,41 +8,39 @@
 
         {% csrf_token %}
 
-        <div class="field">
-            <label>Nome do Rio</label>
-
-            <div class="ui corner labeled input">
-                <input type="text" name="nome" id="nome_rio" required>
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field ten wide">
+                <label>Nome do Rio</label>
+                <div class="ui corner labeled input">
+                    <input type="text" name="nome" id="nome_rio" required>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="field">
-            <label>Dimensão</label>
-
-            <div class="ui corner labeled input">
-                <input id="dimensao_rio" name="dimensao" pattern="(\d+\.?)+" required="True" title="Apenas números e ponto" type="text">
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+            <div class="field six wide">
+                <label>Dimensão</label>
+                <div class="ui corner labeled input">
+                    <input id="dimensao_rio" name="dimensao" pattern="(\d+\.?)+" required="True"
+                           title="Apenas números e ponto" type="text">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="field">
+        <div class="field space">
             <label>Bacia Hidrográfica</label>
-
             <div class="ui corner labeled input">
                 <input type="text" name="bacia_hidrografica" id="bh_rio" required disabled="True">
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>
             </div>
-
         </div>
+
         <input type="hidden" name="rio_id" id="id_rio"/>
 
         <div class="actions">
@@ -50,9 +48,9 @@
                 Cancelar
             </div>
             <input type="submit" class="ui right teal button" value="Editar"/>
-        </input>
+            </input>
         </div>
-    </form>
 
+    </form>
 
 </div>

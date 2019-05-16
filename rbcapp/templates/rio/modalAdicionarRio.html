@@ -8,41 +8,39 @@
 
         {% csrf_token %}
 
-        <div class="field">
-            <label>Nome do Rio</label>
-            {{ form.nome.errors }}
-            <div class="ui corner labeled input">
-                {{ form.nome }}
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field ten wide">
+                <label>Nome do Rio</label>
+                {{ form.nome.errors }}
+                <div class="ui corner labeled input">
+                    {{ form.nome }}
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
 
-        </div>
-
-        <div class="field">
-            <label>Dimensão</label>
-            {{ form.dimensao.errors }}
-            <div class="ui corner labeled input">
-                {{ form.dimensao }}
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+            <div class="field six wide">
+                <label>Dimensão</label>
+                {{ form.dimensao.errors }}
+                <div class="ui corner labeled input">
+                    {{ form.dimensao }}
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="field">
+        <div class="field space">
             <label>Bacia Hidrográfica</label>
             {{ form.bacia_hidrografic.errors }}
             <div class="ui corner labeled input">
-
                 {{ form.bacia_hidrografica }}
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>
             </div>
-
         </div>
 
         <div class="actions">
@@ -52,6 +50,5 @@
             <input type="submit" class="ui right teal button" value="Cadastrar"/>
         </div>
     </form>
-
 
 </div>

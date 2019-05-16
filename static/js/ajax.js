@@ -73,7 +73,6 @@ function ponto_para_coleta() {
         var options = '<option>Selecione primeiro um ponto</option>';
         $("select#coleta").html(options);
         $("select#coleta").attr('disabled', true);
-
     } else {
         $.ajax({
             type: 'GET',
@@ -99,7 +98,9 @@ function ponto_para_coleta() {
     }
 }
 function enviar() {
+    // $("#enviar").attr("action"," {% url 'monitoramento_localizacao' %} ");
     $("button.botao").removeAttr('disabled');
+
 }
 
 //

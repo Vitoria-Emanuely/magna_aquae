@@ -4,12 +4,16 @@ from rbcapp.models import Bacia_Hidrografica, Imagem, Entorno, Monitoramento, Po
 from django.shortcuts import render, redirect, HttpResponse
 from django.views.generic.base import View
 from django.db import connection
+from rbcapp.forms.bacia_hidrografica import FormBaciaHidrografica
 from django.core import serializers
 
 class Monitoramento_Localizacao(View):
+
     def get(self, request):
+        form = FormBaciaHidrografica()
         bhs = Bacia_Hidrografica.objects.all()
-        return render(request, 'monitoramento/localizacao.html', {'bhs': bhs})
+        teste = "null"
+        return render(request, 'monitoramento/localizacao.html', {'bhs': bhs, 'form': form, 'teste': teste})
     
     def post(self, request):
         return redirect('monitoramento_imagem', coleta=request.POST['coleta'])
