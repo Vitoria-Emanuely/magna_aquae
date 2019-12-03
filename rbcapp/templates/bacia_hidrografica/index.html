@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 
 
-{% block 'conteudo' %}
+{% block conteudo %}
 
 
     <div class="two wide column">
@@ -14,29 +14,8 @@
     <article class="twelve wide column">
 
         <div class="row">
-
             <nav class="ui text stackable menu">
-                <h2 class="ui header">
-                    Bacias Hidrográficas
-                </h2>
-{#                <div class="ui right floated selection search dropdown item">#}
-{#                    <input type="hidden" name="Bacia Hidrografica">#}
-{#                    <i class="dropdown icon"></i>#}
-{#                    <div class="default text">Bacia Hidrográfica</div>#}
-{#                    <div class="menu">#}
-{#                        <div class="item" data-value="1">Todos</div>#}
-{#                        <div class="item" data-value="1">Parati</div>#}
-{#                        <div class="item" data-value="0">Cubatão</div>#}
-{#                        <div class="item" data-value="0">Babitonga</div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="item">#}
-{#                    <div class="ui icon large input">#}
-{#                        <input type="text" placeholder="Search...">#}
-{#                        <i class="inverted circular search link icon"></i>#}
-{#                    </div>#}
-{#                </div>#}
-
+                <h2 class="ui header">Bacias Hidrográficas</h2>
             </nav>
         </div>
 
@@ -50,61 +29,181 @@
                         Adicionar Bacia Hidrográfica
                     </button>
                 </th>
-
-            </tr>
-            <tr>
-                <th>Nome</th>
-                <th class="collapsing center aligned" colspan="2">Ações</th>
             </tr>
             </thead>
-            <tbody>
-            {% if dados %}
-                {% for dado in dados %}
-                <tr>
-                    <td>{{ dado.nome }}</td>
-                    <td class="collapsing center aligned">
-                        <input type="hidden" id="{{ dado.id }}" value="{{ dado.nome }}"/>
-                        <a class="cursorPointer editarBacia" onclick="bh_editar({{ dado.id }});">
-                            <i class="ui write grey large icon"></i>
-                        </a>
-                    </td>
-                    <td class="collapsing center aligned">
-                        <a class="cursorPointer excluirBacia" onclick="bh_excluir({{ dado.id }});">
-                            <i class="ui trash red large icon"></i>
-                        </a>
-                </tr>
-                {% endfor %}
-            {% else %}
-                <tr><td>Não há dados cadastrados.</td></tr>
-            {% endif %}
-
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="5">
-                    <div class="ui right floated pagination secondary menu">
-                        {% if dados.has_previous %}
-                            <a href="?page={{ dados.previous_page_number }}" class="icon item">
-                                <i class="left chevron icon"></i>
-                            </a>
-                        {% endif %}
-                        <a class="item">Página {{ dados.number }} de {{ dados.paginator.num_pages }}</a>
-                        {% if dados.has_next %}
-                            <a href="?page={{ dados.next_page_number }}" class="icon item">
-                                <i class="right chevron icon"></i>
-                            </a>
-                        {% endif %}
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
         </table>
+        <div class="ui top attached tabular menu">
+            <div class="{% if not ativo %}active {% endif %} item" data-tab="first">Minhas Bacias</div>
+            <div class="{% if ativo %}active {% endif %}item" data-tab="second">Outras Bacias</div>
+            <div class="item" data-tab="third">Bacias Padrões</div>
+        </div>
+
+        <div class="ui tab tabular attached bottom segment {% if not ativo %}active {% endif %}" data-tab="first">
+            <table class="ui striped celled unstackable table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="collapsing center aligned" colspan="3">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% if dados %}
+                    {% for dado in dados %}
+                        <tr>
+                            <td>{{ dado.nome }}</td>
+                            <td class="collapsing center aligned">
+                                <input type="hidden" id="{{ dado.id }}" value=" {{ dado.nome }}"/>
+                                <a class="cursorPointer editarBacia"
+                                   onclick="bh_editar({{ dado.id }}); page({{ dado.id }}, {{ dados.number }});">
+                                    <i class="ui write grey large icon"></i>
+                                </a>
+                            </td>
+                            <td class="collapsing center aligned">
+                                <a class="cursorPointer excluirBacia" onclick="bh_excluir({{ dado.id }});">
+                                    <i class="ui trash red large icon"></i>
+                                </a>
+                            </td>
+                            <td class="collapsing center aligned">
+                                {% if dado.publico %}
+                                    <div class="ui fitted toggle checkbox visualizacao tooltip" data-tooltip="Público"
+                                         data-position="top center"
+                                         onclick="publico({{ dado.id }}, {{ dado.id }}, {{ dados.number }});">
+                                        <i class="ui eye green large icon"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="ui fitted toggle checkbox visualizacao tooltip" data-tooltip="Privado"
+                                         data-position="top center"
+                                         onclick="publico({{ dado.id }}, {{ dado.id }}, {{ dados.number }});">
+                                        <i class="ui eye slash outline large icon"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                {% else %}
+                    <tr>
+                        <td>Não há dados cadastrados.</td>
+                    </tr>
+                {% endif %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="5">
+                        <div class="ui right floated pagination secondary menu">
+                            {% if dados.has_previous %}
+                                <a href="?page={{ dados.previous_page_number }}" class="icon item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+                            {% endif %}
+                            <a class="item">Página {{ dados.number }} de {{ dados.paginator.num_pages }}</a>
+                            {% if dados.has_next %}
+                                <a href="?page={{ dados.next_page_number }}" class="icon item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="ui tab bottom attached tabular segment {% if ativo %}active {% endif %}" data-tab="second">
+
+            <table class="ui striped celled unstackable table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="collapsing center aligned" colspan="1">Copiar</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% if dados_outros %}
+                    {% for dado_outro in dados_outros %}
+                        <tr>
+                            <td>{{ dado_outro.nome }}</td>
+                            <td class="collapsing center aligned">
+                                <input type="hidden" id="{{ dado_outro.id }}" value=" {{ dado_outro.nome }}"/>
+                                <a class="cursorPointer copiar" onclick="copiar({{ dado_outro.id }});">
+                                    <i class="ui copy blue large icon"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                {% else %}
+                    <tr>
+                        <td>Não há dados cadastrados.</td>
+                    </tr>
+                {% endif %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="4">
+                        <div class="ui right floated pagination secondary menu">
+                            {% if dados_outros.has_previous %}
+                                <a href="?outros={{ dados_outros.previous_page_number }}" class="icon item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+                            {% endif %}
+                            <a class="item">Página {{ dados_outros.number }}
+                                de {{ dados_outros.paginator.num_pages }}</a>
+                            {% if dados_outros.has_next %}
+                                <a href="?outros={{ dados_outros.next_page_number }}" class="icon item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+
+        <div class="ui tab bottom attached tabular segment" data-tab="third">
+            <table class="ui striped celled unstackable table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th class="collapsing center aligned" colspan="1">Copiar</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% if padrao %}
+                    {% for pad in padrao %}
+                        <tr>
+                            <td>{{ pad.nome }}</td>
+                            <td class="collapsing center aligned">
+                                <input type="hidden" id="{{ pad.id }}" value=" {{ pad.nome }}"/>
+                                <a class="cursorPointer copiar" onclick="copiar({{ pad.id }});">
+                                    <i class="ui copy blue large icon"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                {% else %}
+                    <tr>
+                        <td>Não há dados cadastrados.</td>
+                    </tr>
+                {% endif %}
+
+                </tbody>
+            </table>
+        </div>
     </article>
-
-
 
     {% include 'bacia_hidrografica/modalAdicionarBacia.html' %}
     {% include 'bacia_hidrografica/modalEditarBacia.html' %}
     {% include 'bacia_hidrografica/modalExcluirBacia.html' %}
+    {% include 'modal/modalPublico.html' %}
+    {% include 'modal/modalCopiar.html' %}
 
 {% endblock %}

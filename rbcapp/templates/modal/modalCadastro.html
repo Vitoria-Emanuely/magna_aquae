@@ -34,7 +34,7 @@
         </div>
         <div class="ui grid">
             <div class="field eight wide">
-                <label>E-Mail</label>
+                <label>E-mail</label>
                 <div class="ui corner labeled input">
                     {{ form.email }}
                     <div class="ui corner label">
@@ -58,11 +58,8 @@
         </div>
 
         <div class="ui grid">
-            <div class="field ten wide">
+            <div class="field eight wide">
                 <label>Usuário</label>
-                {% if form.username.errors %}
-                    <div class="ui negative message"><i class="close icon"></i> {{ form.username.errors }}</div>
-                {% endif %}
                 <div class="ui corner labeled input">
                     {{ form.username }}
                     <div class="ui corner label">
@@ -70,14 +67,27 @@
                     </div>
                 </div>
             </div>
+            <div class="eight wide field">
+                {% if erro_cad %}
+                    <div class="ui negative message eight wide field centralizar mensagem"><i class="close icon"></i> Um usuário com este nome de usuário já existe.
+                    </div>
+                {% endif %}
+            </div>
+
         </div>
 
-        {% if senha_erro %}
-            <div class="ui negative message"><i class="close icon"></i> As senhas não conferem!</div>
-        {% endif %}
+        <div class="ui grid sixteen wide field">
+            {% if senha_erro %}
+                <div class="ui negative message sixteen wide field space centralizar"><i class="close icon"></i> As
+                    senhas não
+                    conferem!
+                </div>
+            {% endif %}
+        </div>
         <div class="ui grid">
             <div class="field eight wide">
                 <label>Senha</label>
+
                 <div class="ui corner labeled input">
                     {{ form.password }}
                     <div class="ui corner label">
@@ -90,7 +100,6 @@
                 <label>Confirme sua senha</label>
                 <div class="ui corner labeled input">
                     {{ form.senha_conferir }}
-
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
                     </div>
@@ -98,34 +107,13 @@
             </div>
         </div>
 
-        <div class="ui grid">
-            <div class="field eight wide">
-                <label>Pergunta de segurança</label>
-                <div class="ui corner labeled input">
-                    {{ form.pergunta }}
-                    <div class="ui corner label">
-                        <i class="asterisk icon"></i>
-                    </div>
-                </div>
+        <div class="actions space">
+            <div class="ui deny button">
+                Cancelar
             </div>
-
-            <div class="field eight wide">
-                <label>Resposta</label>
-                <div class="ui corner labeled input">
-                    {{ form.resposta }}
-                    <div class="ui corner label">
-                        <i class="asterisk icon"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="actions">
-                <div class="ui deny button">
-                    Cancelar
-                </div>
-                <input class="ui right teal button" type="submit" value="Cadastre-se"/>
-            </div>
+            <input class="ui right teal button" type="submit" value="Cadastrar-se"/>
         </div>
+
     </form>
 
 </div>

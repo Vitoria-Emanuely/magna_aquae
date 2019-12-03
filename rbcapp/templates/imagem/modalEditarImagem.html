@@ -1,0 +1,49 @@
+<div class="ui modal modalEditarImagem">
+    <i class="close icon"></i>
+    <div class="header">
+        <i class="ui add small teal inverted circular icon"></i>Editar Imagem
+    </div>
+
+{#    <script>#}
+{#        var mydate= new Date();#}
+{##}
+{#        document.write(mydate.getDate()+"/"+(mydate.getMonth()+1)+"/"+mydate.getFullYear);#}
+{#    </script>#}
+
+    <form method="POST" action="{% url 'imagem_edit' %}" enctype="multipart/form-data" class="ui content form">
+        {% csrf_token %}
+
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Título da Imagem</label>
+                <div class="ui corner labeled input">
+                    <input type="text" name="titulo" id="titulo">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Data de emissão</label>
+                <div class="ui corner labeled input">
+                    <input data-date-format="DD MMMM YYYY" type="date" name="data_emissao" id="data_emissao" max="{{ data_max }}" required>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" name="imagem_id" id="imagem_id">
+
+        <div class="actions space">
+            <div class="ui deny button">
+                Cancelar
+            </div>
+            <input type="submit" value="Editar" class="ui right teal button"/>
+        </div>
+
+    </form>
+
+</div>

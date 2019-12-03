@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 
-{% block 'conteudo' %}
+{% block conteudo %}
 
     <div class="two wide column" xmlns="http://www.w3.org/1999/html"></div>
 
@@ -51,14 +51,13 @@
                     </div>
                 </h3>
 
-
                 <form action="{% url 'monitoramento_localizacao' %}" method="POST">
 
                     {% csrf_token %}
-                    <div class="ui secondary segment large form formMonitoramento">
 
-                        <div class="equal width fields">
-                            <div class="field">
+                    <div class="ui secondary segment large form formMonitoramento">
+                        <div class="ui grid">
+                            <div class="field seven wide">
                                 <label>Selecionar Bacia Hidrográfica</label>
                                 <select onchange="bacia_para_rio()" name="bh" id="bh" required="True">
                                     <option value="selecione">Selecione uma bacia hidrográfica</option>
@@ -66,55 +65,61 @@
                                         <option value="{{ bh.id }}">{{ bh.nome }}</option>
                                     {% endfor %}
                                 </select>
-                                <a class="ui labeled icon button adicionarBacia">
-                                    <i class="icon add"></i>
-                                </a>
                             </div>
-                            <div class="field">
+                            <a class="ui icon button adicionarBacia botaoAzul">
+                                <i class="add icon"></i>
+                            </a>
+
+                            <div class="field seven wide">
                                 <label>Selecionar Rio</label>
                                 <select onchange="rio_para_ponto()" name="rio" id="rio" disabled="True" required="True">
                                     <option value="selecione">Selecione primeiro uma bacia hidrográfica</option>
                                 </select>
                             </div>
+                            <a class="ui icon button adicionarRio botaoAzul">
+                                <i class="add icon"></i>
+                            </a>
                         </div>
-                        <div class="equal width fields">
-                            <div class="field">
+
+                        <div class="ui grid">
+                            <div class="field seven wide">
                                 <label>Selecionar ponto</label>
                                 <select onchange="ponto_para_coleta()" name="ponto" id="ponto_monitoramento"
                                         disabled="True" required="True">
                                     <option value="selecione">Selecione primeiro um rio</option>
                                 </select>
                             </div>
+                            <a class="ui icon button adicionarPonto botaoAzul">
+                                <i class="add icon"></i>
+                            </a>
 
-                            <div class="field">
+                            <div class="field seven wide">
                                 <label>Data da Coleta</label>
                                 <select onchange="enviar()" name="coleta" id="coleta" disabled="True" required="True">
                                     <option value="selecione">Selecione primeiro um ponto</option>
                                 </select>
                             </div>
+                            <a class="ui icon button adicionarColeta botaoAzul">
+                                <i class="add icon"></i>
+                            </a>
                         </div>
 
+                        <div class="ui two bottom attached buttons space">
+                            <a class="ui left labeled icon secundary button disabled">
+                                <i class="left arrow icon"></i>
+                                Voltar
+                            </a>
+                            <button type="submit" class="ui right labeled icon botaoProximo button botao" disabled>
+                                <i class="right arrow icon"></i>
+                                Próximo Passo
+                            </button>
+                        </div>
                     </div>
-
-                    <div class="ui two bottom attached buttons">
-                        <a class="ui left labeled icon secundary button disabled">
-                            <i class="left arrow icon"></i>
-                            Voltar
-                        </a>
-                        <button type="submit" class="ui right labeled icon botaoProximo button botao" disabled>
-                            <i class="right arrow icon"></i>
-                            Próximo Passo
-                        </button>
-                    </div>
-
                 </form>
-
 
             </div>
 
-
         </div>
-
 
     </article>
 

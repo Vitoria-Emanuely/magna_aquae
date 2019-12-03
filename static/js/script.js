@@ -8,10 +8,7 @@ $(document).ready(function () {
         navigation: true,
         navigationText: ["voltar", "próximo"],
         autoHeight: false,
-
-
     });
-
 
     $('.ui.dropdown')
         .dropdown()
@@ -20,7 +17,6 @@ $(document).ready(function () {
     $('.ui.checkbox')
         .checkbox()
     ;
-
 
     var $section = $('section').first();
     $section.find('.panzoom').panzoom({
@@ -37,7 +33,7 @@ $(document).ready(function () {
         start: 0,
     });
 
-    //bacia
+    //Bacia
     $("body").on("click", ".adicionarBacia", function () {
         $('.modalAdicionarBacia').modal('show');
     });
@@ -50,7 +46,7 @@ $(document).ready(function () {
         $('.modalExcluirBacia').modal('show');
     });
 
-    //rio
+    //Rio
     $("body").on("click", ".adicionarRio", function () {
         $('.modalAdicionarRio').modal('show');
     });
@@ -59,7 +55,7 @@ $(document).ready(function () {
         $('.modalEditarRio').modal('show');
     });
 
-    $("body").on("click",".editarRio", function(){
+    $("body").on("click", ".editarRio", function () {
         $('.modalEditarRio').modal('show');
     });
 
@@ -67,7 +63,7 @@ $(document).ready(function () {
         $('.modalExcluirRio').modal('show');
     });
 
-    //ponto
+    //Ponto
     $("body").on("click", ".adicionarPonto", function () {
         $('.modalAdicionarPonto').modal('show');
     });
@@ -80,7 +76,7 @@ $(document).ready(function () {
         $('.modalExcluirPonto').modal('show');
     });
 
-    //coleta
+    //Coleta
     $("body").on("click", ".adicionarColeta", function () {
         $('.modalAdicionarColeta').modal('show');
     });
@@ -93,7 +89,7 @@ $(document).ready(function () {
         $('.modalExcluirColeta').modal('show');
     });
 
-    //ponto
+    //Caso
     $("body").on("click", ".adicionarCaso", function () {
         $('.modalAdicionarCaso').modal('show');
     });
@@ -106,7 +102,7 @@ $(document).ready(function () {
         $('.modalExcluirCaso').modal('show');
     });
 
-    //entorno
+    //Entorno
     $("body").on("click", ".adicionarEntorno", function () {
         $('.modalAdicionarEntorno').modal('show');
     });
@@ -115,7 +111,11 @@ $(document).ready(function () {
         $('.modalExcluirEntorno').modal('show');
     });
 
-    //cadastro
+    $("body").on("click", ".editarEntorno", function () {
+        $('.modalEditarEntorno').modal('show');
+    });
+
+    //Cadastro
     $("body").on("click", ".cadastro", function () {
         $('.modalCadastro').modal('show');
     });
@@ -124,17 +124,25 @@ $(document).ready(function () {
         $('.modalRecuperarSenha').modal('show');
     });
 
-    //imagem
+    //Imagem
     $("body").on("click", ".adicionarImagem", function () {
         $('.modalAdicionarImagem').modal('show');
     });
 
-    //conta
+    $("body").on("click", ".editarImagem", function () {
+        $('.modalEditarImagem').modal('show');
+    });
+
+    $("body").on("click", ".excluirImagem", function () {
+        $('.modalExcluirImagem').modal('show');
+    });
+
+    //Conta
     $("body").on("click", ".acessarConta", function () {
         $('.modalAcessarConta').modal('show');
     });
 
-    //monitoramento
+    //Monitoramento
     $("body").on("click", ".editarSolucao", function () {
         $('.modalEditarSolucao').modal('show');
     });
@@ -143,15 +151,41 @@ $(document).ready(function () {
         $('.modalUtilizarSolucao').modal('show');
     });
 
-    //img
-
+    //Imagem
     $("body").on("click", ".excluirImagem", function () {
         $('.modalExcluirImagem').modal('show');
     });
 
-    //sobre
-
+    //Sobre
     $("body").on("click", ".sobre", function () {
         $('.modalSobre').modal('show');
+    });
+
+    //Usuário
+    $("body").on("click", ".editarUsuario", function () {
+        $('.modalEditarUsuario').modal('show');
+    });
+
+    $("body").on("click", ".editarSenha", function () {
+        $('.modalEditarSenha').modal('show');
+    });
+
+    //Detalhes (Histórico)
+    $(".modalImagem").click(function () {
+        $(".modalDetalhes" + $(this).attr('id')).modal('show');
+    });
+
+    $("body").on("click", ".excluirMonitoramento", function () {
+        $('.modalExcluirMonitoramento').modal('show');
+    });
+
+    //Publico
+    $("body").on("click", ".visualizacao", function () {
+        $('.modalPublico').modal('show');
+    });
+
+    //Copiar
+    $("body").on("click", ".copiar", function () {
+        $('.modalCopiar').modal('show');
     });
 });

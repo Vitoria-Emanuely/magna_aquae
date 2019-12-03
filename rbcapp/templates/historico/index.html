@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 
-{% block 'conteudo' %}
+{% block conteudo %}
     <div class="two wide column"></div>
     <article class="twelve wide column">
         <h3 class="ui center aligned icon header">
@@ -14,55 +14,52 @@
             </div>
         </h3>
 
-        <table class="ui large center aligned selectable table">
-            <thead>
-            <tr>
-                <th class="collapsing cabecalhoTabela">Ponto (lat. long.)</th>
-                <th class="cabecalhoTabela ">Rio</th>
-                <th class="cabecalhoTabela">Bacia Hidrográfica</th>
-                <th class="collapsing cabecalhoTabela">Detalhes</th>
+        <form action="{% url 'historico_detalhes' %}" method="POST">
 
-            </tr>
-            </thead>
-            <tbody>
+            {% csrf_token %}
 
-            {% for ponto in pontos %}
-                <tr>
-                    <td>{{ ponto.ponto }}</td>
-                    <td>{{ ponto.rio }}</td>
-                    <td>{{ ponto.bacia }}</td>
-                    <td class="center aligned">
-                        <a href="{% url 'historico_detalhes' ponto_id=ponto.id %}">
-                            <i class="ui large teal plus square outline icon"></i>
-                        </a>
-                    </td>
-                </tr>
-            {% endfor %}
-
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="5">
-                    <div class="ui right floated pagination secondary menu">
-                        {% if pontos.has_previous %}
-                            <a href="?page={{ pontos.previous_page_number }}" class="icon item">
-                                <i class="left chevron icon"></i>
-                            </a>
-                        {% endif %}
-                        <a class="item">Página {{ pontos.number }} de {{ pontos.paginator.num_pages }}</a>
-                        {% if pontos.has_next %}
-                            <a href="?page={{ pontos.next_page_number }}" class="icon item">
-                                <i class="right chevron icon"></i>
-                            </a>
-                        {% endif %}
+            <div class="ui secondary segment large form formMonitoramento">
+                <div class="ui grid">
+                    <div class="field five wide">
+                        <label>Selecionar Bacia Hidrográfica</label>
+                        <select onchange="bacia_para_rio()" name="bh" id="bh" required="True">
+                            <option value="selecione">Selecione uma bacia hidrográfica</option>
+                            {% for bh in bhs %}
+                                <option value="{{ bh.id }}">{{ bh.nome }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
-                </th>
-            </tr>
-            </tfoot>
-        </table>
+
+                    <div class="field five wide">
+                        <label>Selecionar Rio</label>
+                        <select onchange="rio_para_ponto(); enviar()" name="rio" id="rio" disabled="True" required="True">
+                            <option value="selecione">Selecione primeiro uma bacia hidrográfica</option>
+                        </select>
+                    </div>
+
+                    <div class="field five wide">
+                        <label>Selecionar Ponto</label>
+                        <select onchange="ponto_para_coleta(); enviar()" name="ponto" id="ponto_monitoramento"
+                                disabled="True" required="True">
+                            <option value="selecione">Selecione primeiro um rio</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="ui two bottom attached buttons space">
+                    <a class="ui left labeled icon secundary button" href="{% url 'index' %}">
+                        <i class="left arrow icon"></i>
+                        Voltar
+                    </a>
+                    <button type="submit" class="ui right labeled icon botaoProximo button botao" disabled>
+                        <i class="right arrow icon"></i>
+                        Próximo Passo
+                    </button>
+                </div>
+            </div>
+        </form>
 
     </article>
     <div class="two wide column"></div>
-
 
 {% endblock %}

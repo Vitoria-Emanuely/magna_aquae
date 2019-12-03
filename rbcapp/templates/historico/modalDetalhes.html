@@ -1,0 +1,126 @@
+{% for dado in dados %}
+    <div class="ui modal modalDetalhes{{ dado.imagem.id }}">
+        <i class="close icon"></i>
+        <div class="header">
+            <i class="ui add small teal inverted circular icon"></i> Detalhes do Ponto
+        </div>
+
+        <div id="margem-img">
+            <article id="owl-homepage" class="ui grid">
+                <div class="ui fluid card img_body">
+                    <div class="ui vertical cabecalhoDetalhesHistorico content">
+                        <h4 class="center aligned cabecalhoDetalhesHistorico header"><i
+                                class="ui icon calendar"></i>
+                            {{ dado.imagem.data_emissao }}</h4>
+                    </div>
+
+                    <section>
+                        <div class="parent zoomImagemMonitoramento">
+                            <div class="panzoom modalImagem img_head">
+                                <img src="/media/{{ dado.imagem.imagem }}">
+                            </div>
+                        </div>
+
+                        <footer class="ui two column grid">
+                            <div class="column">
+                                <div class="ui slider range basic segment">
+                                    <input type="range" class="zoom-range">
+                                </div>
+                            </div>
+
+                            <div class="column">
+                                <div class="ui basic segment">
+                                    <div class="ui fluid buttons">
+                                        <button class="ui button  zoom-in"><i class="zoom icon"></i></button>
+                                        <button class="ui button zoom-out"><i class="zoom out icon"></i></button>
+                                        <button class="ui button reset"><i class="undo icon"></i></button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </footer>
+                    </section>
+
+                    <div class="content">
+                        <div class="header">{{ dado.imagem.titulo }}</div>
+                        <table class="ui striped celled unstackable table definition">
+                            <tbody>
+                            <tr>
+                                <td class="collapsing">Classificação IAP
+                                    <div class="ui icon button tooltip"
+                                         data-tooltip="Índice de Qualidade da Água Bruta para fins de Abastecimento Público"
+                                         data-position="top center"
+                                         data-inverted="">
+                                        <i class="question circle icon"></i>
+                                    </div>
+                                </td>
+                                <td>{% if dado.classificacao_iap == 'otima' %}
+                                    Ótima
+                                {% elif dado.classificacao_iap == 'boa' %}
+                                    Boa
+                                {% elif dado.classificacao_iap == 'regular' %}
+                                    Regular
+                                {% elif dado.classificacao_iap == 'ruim' %}
+                                    Ruim
+                                {% elif dado.classificacao_iap == 'pessima' %}
+                                    Péssima
+                                {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsing">Classificação IVA
+                                    <div class="ui icon button tooltip"
+                                         data-tooltip="Índice de Proteção da Vida Aquática"
+                                         data-position="top center"
+                                         data-inverted="">
+                                        <i class="question circle icon"></i>
+                                    </div>
+                                </td>
+                                <td>{% if dado.classificacao_iva == 'otima' %}
+                                    Ótima
+                                {% elif dado.classificacao_iva == 'boa' %}
+                                    Boa
+                                {% elif dado.classificacao_iva == 'regular' %}
+                                    Regular
+                                {% elif dado.classificacao_iva == 'ruim' %}
+                                    Ruim
+                                {% elif dado.classificacao_iva == 'pessima' %}
+                                    Péssima
+                                {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsing">Entorno</td>
+                                <td>{{ dado.entorno.variavel_entorno }}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsing">Risco</td>
+                                <td>{% if dado.risco == 'A' %}
+                                    Alto
+                                {% elif dado.risco == 'M' %}
+                                    Médio
+                                {% elif dado.risco == 'B' %}
+                                    Baixo
+                                {% endif %}</td>
+                            </tr>
+                            <tr>
+                                <td class="collapsing">Solução</td>
+                                <td>{{ dado.solucao_sugerida }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="actions space">
+            <a class="cursorPointer excluirMonitoramento" onclick="mon_excluir({{ dado.id }});">
+                <input type="submit" class="ui left floated teal button" value="Excluir"/>
+            </a>
+            <div class="ui deny button">
+                Cancelar
+            </div>
+        </div>
+
+    </div>
+
+{% endfor %}

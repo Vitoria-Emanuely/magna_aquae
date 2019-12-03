@@ -22,7 +22,7 @@
                 <label>Bacia Hidrográfica</label>
                 <div class="ui corner labeled input">
                     <select onchange="bacia_para_rio()" name="bacia" id="bh">
-                        <option value="selecione">Selecione uma bacia hidrografica</option>
+                        <option value="selecione">Selecione uma bacia hidrográfica</option>
                         {% for bh in bhs %}
                             <option value="{{ bh.id }}">{{ bh.nome }}</option>
                         {% endfor %}
@@ -63,7 +63,7 @@
         <div class="ui grid">
             <div class="field eight wide">
                 <label>Coleta</label>
-                <div class="ui corner labeled input">
+                <div class="ui corner labeled input meta">
                     <select name="coleta" id="coleta" disabled="True">
                         <option value="selecione">Selecione primeiro um ponto</option>
                     </select>
@@ -72,8 +72,8 @@
 
             <div class="field eight wide">
                 <label>Data de emissão</label>
-                <div class="ui corner labeled input">
-                    <input type="date" name="data_emissao" required>
+                <div class="ui corner labeled input meta">
+                    <input class="date" type="date" name="data_emissao" max="{{ data_max }}" required>
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
                     </div>

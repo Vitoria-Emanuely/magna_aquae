@@ -1,8 +1,7 @@
 # coding: utf-8
 
-from rbcapp.models import Bacia_Hidrografica, Rio, Ponto_Monitoramento, Coleta, Monitoramento, Entorno
+from rbcapp.models import Monitoramento, Entorno
 from django import forms
-from django.db.models import Count
 
 
 class FormPesquisa(forms.Form):

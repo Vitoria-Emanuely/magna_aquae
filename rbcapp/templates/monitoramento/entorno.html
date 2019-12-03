@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 
 {% load staticfiles %}
-{% block 'conteudo' %}
+{% block conteudo %}
     <div class="two wide column computer only"></div>
 
     <!--======================= FIM MENU VERTICAL ESQUERDO ============================== -->
@@ -12,23 +12,19 @@
 
     <!--======================= CONTEÚDO PRINCIPAL [MEIO] ============================== -->
     <!--================================================================================ -->
-    {#    <article class="twelve wide column">#}
-    {##}
-    {#        <div class="ui one column centered grid">#}
 
     <article class="sixteen wide tablet twelve wide computer column">
-
         <div class="ui one column centered conteudoEtapas grid">
 
             <div class="column">
                 <header class="ui ordered fluid tablet stackable steps">
-                    <a class="completed step">
+                    <a class="completed step" href="{% url 'monitoramento_localizacao' %}">
                         <div class="content">
                             <div class="title">Selecionar Localização</div>
                             <div class="description">Bacia, Rio, Ponto e Coleta</div>
                         </div>
                     </a>
-                    <a class="completed step">
+                    <a class="completed step" href="{% url 'monitoramento_imagem' coleta=img.coleta_id %}">
                         <div class="content">
                             <div class="title">Selecionar Imagem</div>
                             <div class="description">Imagem referente a localização</div>
@@ -47,13 +43,25 @@
                         </div>
                     </div>
                 </header>
+                <article class="ui center aligned basic segment">
+                    <button class="ui labeled large botaoUpload icon button adicionarEntorno">
+                        <i class="icon add"></i>
+                        Adicionar Novo Entorno
+                    </button>
+                    <div class="ui horizontal divider">
+                        Ou
+                    </div>
+                    <div class="ui left icon action input">
+                        <h3 class="ui header">
+                            Selecione um Entorno
+                        </h3>
+                    </div>
 
+                </article>
                 <article class="ui grid center aligned basic stackable conteudoEtapas segment">
                     <div class="sixteen wide column">
 
                         <section>
-                            <h3>Selecione um entorno</h3>
-
                             <div class="parent zoomImagemMonitoramento">
                                 <div class="panzoom">
                                     <img src="/media/{{ img.imagem }}" width="400" height="400">
@@ -78,21 +86,15 @@
                                     </div>
 
                                 </div>
-
-
                             </footer>
 
-
-                            <script>
-
-                            </script>
                         </section>
 
                         <form method="GET" action="{% url 'monitoramento_solucao' %}">
                             {% csrf_token %}
                             <div class="ui right floated large form">
-                                <div class="field">
-                                    <label>Adicionar entorno</label>
+                                <div class="field eight wide">
+                                    <label>Selecionar entorno</label>
 
                                     <div class="ui dropdown search selection">
 
@@ -100,7 +102,8 @@
                                         <div class="default text">Selecione o entorno</div>
                                         <div class="menu">
                                             {% for entorno in entornos %}
-                                                <div onclick="monitoramento_entorno({{ entorno.id }});enviar()" class="item">
+                                                <div onclick="monitoramento_entorno({{ entorno.id }});enviar()"
+                                                     class="item">
                                                     <div style="background-color: {{ entorno.cor }} !important;"
                                                          class="ui empty circular label"></div>
                                                     {{ entorno.variavel_entorno }}
@@ -109,13 +112,15 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                     </div>
 
                 </article>
-                <input type="hidden" name="entorno" id="entorno" onchange="monitoramento_entorno2();"/>
-                <input type="hidden" name="monitoramento" value="{{ monitoramento }}"/>
+                <input type="hidden" name="entorno" id="entorno"/>
+                <input type="hidden" name="coleta" value="{{ img.coleta.id }}"/>
                 <input type="hidden" name="imagem" value="{{ img.id }}"/>
+
                 <div class="two ui buttons">
                     <a href="#" onClick="javascript:history.go(-1);" class="ui left labeled icon secundary button">
                         <i class="left arrow icon"></i>
@@ -126,18 +131,14 @@
                         <i class="right arrow icon"></i>
                         Buscar Solução
                     </button>
-
-
                 </div>
                 </form>
 
-
             </div>
-
 
         </div>
 
-
     </article>
+    {% include 'entorno/modalAdicionarEntorno.html' %}
 
 {% endblock %}

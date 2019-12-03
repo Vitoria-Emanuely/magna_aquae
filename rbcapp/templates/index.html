@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/paginaInicial.css' %}">
     <link rel="stylesheet" href="{% static 'css/semantic/semantic.min.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Marvel" rel="stylesheet">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
 </head>
 
 <body>
@@ -21,20 +22,13 @@
     <div class="textoMonitoramento">
         <div class="ui header">Monitoramento de Bacias Hidrográficas</div>
 
-        <button class="ui large right labeled icon button botaoCorVerde sobre">
-            <i class="chevron right icon"></i>
+        <button class="ui large right labeled icon button botaoCorVerde sobre space_coleta">
             Sobre
         </button>
-        <button class="ui large right labeled icon button botaoCorVerde">
-            <a href="{% url 'historico_listar' %}">
-            <i class="chevron right icon"></i>
-            Histórico</a>
 
-        </button>
         {% if user.is_authenticated %}
             <button class="ui large right labeled icon button botaoCorVerde">
                 <a href="{% url 'monitoramento_localizacao' %}">
-                    <i class="chevron right icon"></i>
                     Veja Bacias Hidrográficas Monitoradas
                 </a>
             </button>
@@ -47,33 +41,15 @@
         {% endif %}
     </div>
 
-
 </section>
-
-{#<section class="pequenaDescricao">#}
-{##}
-{#    <h2 class="ui center inverted aligned icon header">#}
-{#        <i class="circular tree icon"></i>#}
-{#        Na rede!#}
-{##}
-{#        <div class="sub header">Escrever alguma coisa aqui para a tela ficar mais bonita</div>#}
-{#    </h2>#}
-{#</section>#}
-{##}
-{#<section class="descricaoMeio">#}
-{##}
-{#</section>#}
-{##}
-{#<section class="informacoesAdicionais">#}
-{##}
-{#</section>#}
 
 <footer class="ui four column stackable grid descricaoFim">
     <div class="row">
         <h3>Apoio</h3>
     </div>
     <div class="center aligned column">
-        <img src="{% static 'img/logo-ifc.png' %}">
+        <a href="https://araquari.ifc.edu.br/">
+        <img src="{% static 'img/logo-ifc.png' %}"></a>
     </div>
     <div class="center aligned column">
         <img src="{% static 'img/ecobabitonga.png' %}">
@@ -82,7 +58,8 @@
         <img src="{% static 'img/logo_fabrica.jpg' %}">
     </div>
     <div class="center aligned column">
-        <img src="{% static 'img/cnpq.png' %}">
+        <a href="http://www.cnpq.br/">
+        <img src="{% static 'img/cnpq.png' %}"></a>
     </div>
 </footer>
 <footer class="rodape">
@@ -107,7 +84,7 @@
     {% if erro_cad %}
         $('.modalCadastro').modal('show');
     {% elif cadastro %}
-        $('.modalCadastroOkay').modal('show');
+        {#$('.modalCadastroOkay').modal('show');#}
     {% endif %}
 </script>
 </body>

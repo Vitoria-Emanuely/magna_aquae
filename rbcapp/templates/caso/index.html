@@ -1,15 +1,13 @@
 {% extends 'base.html' %}
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 
 
-{% block 'conteudo' %}
+{% block conteudo %}
 
 
-    <div class="two wide column">
-        {#        {% include 'menu/menuVertical.html' %}#}
-    </div>
+    <div class="two wide column"></div>
 
     <article class="twelve wide column">
 
@@ -33,100 +31,246 @@
                         Adicionar Caso
                     </button>
                 </th>
-
-            </tr>
-            <tr>
-                <th>Classificação IAP</th>
-                <th>Classificação IVA</th>
-                <th>Entorno</th>
-                <th>Risco</th>
-                <th>Solução Sugerida</th>
-                <th>Ações</th>
             </tr>
             </thead>
-            <tbody>
-            {% if dados %}
-                {% for dado in dados %}
-                    <tr>
-                        <td>
-                            {% if dado.classificacao_iap == 'otima' %}
-                                Ótima
-                            {% elif dado.classificacao_iap == 'boa' %}
-                                Boa
-                            {% elif dado.classificacao_iap == 'regular' %}
-                                Regular
-                            {% elif dado.classificacao_iap == 'ruim' %}
-                                Ruim
-                            {% else %}
-                                Péssima
-                            {% endif %}
-
-                        </td>
-                        <td>
-                            {% if dado.classificacao_iva == 'otima' %}
-                                Ótima
-                            {% elif dado.classificacao_iva == 'boa' %}
-                                Boa
-                            {% elif dado.classificacao_iva == 'regular' %}
-                                Regular
-                            {% elif dado.classificacao_iva == 'ruim' %}
-                                Ruim
-                            {% else %}
-                                Péssima
-                            {% endif %}
-                        </td>
-                        <td>{{ dado.entorno }}</td>
-                        <td>
-                            {% if dado.risco == 'A' %}
-                                Alto
-                            {% elif dado.risco == 'M' %}
-                                Médio
-                            {% else %}
-                                Baixo
-                            {% endif %}
-                        </td>
-                        <td>{{ dado.solucao_sugerida }}</td>
-                        <td>
-                            <input type="hidden" id="{{ dado.id }}" value="{{ dado.nome }}"/>
-                            <a class="cursorPointer excluirCaso" onclick="caso_excluir({{ dado.id }});">
-                                <i class="ui trash red large icon"></i>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <tr>
-                    <td>Não há dados cadastrados.</td>
-                </tr>
-            {% endif %}
-
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="7">
-                    <div class="ui right floated pagination secondary menu">
-                        {% if dados.has_previous %}
-                            <a href="?page={{ dados.previous_page_number }}" class="icon item">
-                                <i class="left chevron icon"></i>
-                            </a>
-                        {% endif %}
-                        <a class="item">Página {{ dados.number }} de {{ dados.paginator.num_pages }}</a>
-                        {% if dados.has_next %}
-                            <a href="?page={{ dados.next_page_number }}" class="icon item">
-                                <i class="right chevron icon"></i>
-                            </a>
-                        {% endif %}
-                    </div>
-                </th>
-            </tr>
-            </tfoot>
         </table>
+        <div class="ui top attached tabular menu">
+            <div class="{% if not ativo %}active {% endif %} item" data-tab="first">Meus Casos</div>
+            <div class="{% if ativo %}active {% endif %} item" data-tab="second">Outros Casos</div>
+        </div>
+        <div class="ui tab tabular attached bottom segment {% if not ativo %}active {% endif %}" data-tab="first">
+            <table class="ui striped celled unstackable table">
+                <thead>
+                <tr>
+                    <th>Classificação IAP
+                        <div class="ui icon button tooltip"
+                             data-tooltip="Índice de Qualidade da Água Bruta para fins de Abastecimento Público"
+                             data-position="top left"
+                             data-inverted="">
+                            <i class="question circle icon"></i>
+                        </div>
+                    </th>
+                    <th>Classificação IVA
+                        <div class="ui icon button tooltip" data-tooltip="Índice de Proteção da Vida Aquática"
+                             data-position="top center"
+                             data-inverted="">
+                            <i class="question circle icon"></i>
+                        </div>
+                    </th>
+                    <th>Entorno</th>
+                    <th>Risco</th>
+                    <th>Solução Sugerida</th>
+                    <th class="collapsing center aligned" colspan="3">Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if dados %}
+                    {% for dado in dados %}
+                        <tr>
+                            <td id="iap">
+                                {% if dado.classificacao_iap == 'otima' %}
+                                    Ótima
+                                {% elif dado.classificacao_iap == 'boa' %}
+                                    Boa
+                                {% elif dado.classificacao_iap == 'regular' %}
+                                    Regular
+                                {% elif dado.classificacao_iap == 'ruim' %}
+                                    Ruim
+                                {% elif dado.classificacao_iap == 'pessima' %}
+                                    Péssima
+                                {% endif %}
+
+                            </td>
+                            <td id="iva">
+                                {% if dado.classificacao_iva == 'otima' %}
+                                    Ótima
+                                {% elif dado.classificacao_iva == 'boa' %}
+                                    Boa
+                                {% elif dado.classificacao_iva == 'regular' %}
+                                    Regular
+                                {% elif dado.classificacao_iva == 'ruim' %}
+                                    Ruim
+                                {% elif dado.classificacao_iva == 'pessima' %}
+                                    Péssima
+                                {% endif %}
+                            </td>
+                            <td id="variavel_entorno{{ dado.id }}">{{ dado.entorno.variavel_entorno }}</td>
+                            <td id="risco">
+                                {% if dado.risco == 'A' %}
+                                    Alto
+                                {% elif dado.risco == 'M' %}
+                                    Médio
+                                {% elif dado.risco == 'B' %}
+                                    Baixo
+                                {% endif %}
+                            </td>
+                            <td id="solucao">{{ dado.solucao_sugerida }}</td>
+                            <td>
+                                <input type="hidden" id="{{ dado.id }}" value="{{ dado.nome }}"/>
+                                <a class="cursorPointer editarCaso" onclick="caso_editar({{ dado.id }}); page({{ dado.id }}, {{ dados.number }});">
+                                    <i class="ui write grey large icon"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <input type="hidden" id="{{ dado.id }}" value="{{ dado.nome }}"/>
+                                <a class="cursorPointer excluirCaso" onclick="caso_excluir({{ dado.id }});">
+                                    <i class="ui trash red large icon"></i>
+                                </a>
+                            </td>
+                            <td class="collapsing center aligned">
+                                {% if dado.publico %}
+                                    <div class="ui fitted toggle checkbox visualizacao tooltip" data-tooltip="Público"
+                                         data-position="top center" onclick="publico({{ dado.id }}, {{ dado.id }}, {{ dados.number }})">
+                                        <i class="ui eye green large icon"></i>
+                                    </div>
+                                {% else %}
+                                    <div class="ui fitted toggle checkbox visualizacao tooltip" data-tooltip="Privado"
+                                         data-position="top center" onclick="publico({{ dado.id }}, {{ dado.id }}, {{ dados.number }})">
+                                        <i class="ui eye slash outline large icon"></i>
+                                    </div>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>Não há dados cadastrados.</td>
+                    </tr>
+                {% endif %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="8">
+                        <div class="ui right floated pagination secondary menu">
+                            {% if dados.has_previous %}
+                                <a href="?page={{ dados.previous_page_number }}" class="icon item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+                            {% endif %}
+                            <a class="item">Página {{ dados.number }} de {{ dados.paginator.num_pages }}</a>
+                            {% if dados.has_next %}
+                                <a href="?page={{ dados.next_page_number }}" class="icon item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="ui tab tabular attached bottom segment {% if ativo %}active {% endif %}" data-tab="second">
+            <table class="ui striped celled unstackable table">
+                <thead>
+                <tr>
+                    <th>Classificação IAP
+                        <div class="ui icon button tooltip"
+                             data-tooltip="Índice de Qualidade da Água Bruta para fins de Abastecimento Público"
+                             data-position="top left"
+                             data-inverted="">
+                            <i class="question circle icon"></i>
+                        </div>
+                    </th>
+                    <th>Classificação IVA
+                        <div class="ui icon button tooltip" data-tooltip="Índice de Proteção da Vida Aquática"
+                             data-position="top center"
+                             data-inverted="">
+                            <i class="question circle icon"></i>
+                        </div>
+                    </th>
+                    <th>Entorno</th>
+                    <th>Risco</th>
+                    <th>Solução Sugerida</th>
+                    <th class="collapsing center aligned" colspan="2">Copiar</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if dados_outros %}
+                    {% for dado_outro in dados_outros %}
+                        <tr>
+                            <td>
+                                {% if dado_outro.classificacao_iap == 'otima' %}
+                                    Ótima
+                                {% elif dado_outro.classificacao_iap == 'boa' %}
+                                    Boa
+                                {% elif dado_outro.classificacao_iap == 'regular' %}
+                                    Regular
+                                {% elif dado_outro.classificacao_iap == 'ruim' %}
+                                    Ruim
+                                {% else %}
+                                    Péssima
+                                {% endif %}
+
+                            </td>
+                            <td>
+                                {% if dado_outro.classificacao_iva == 'otima' %}
+                                    Ótima
+                                {% elif dado_outro.classificacao_iva == 'boa' %}
+                                    Boa
+                                {% elif dado_outro.classificacao_iva == 'regular' %}
+                                    Regular
+                                {% elif dado_outro.classificacao_iva == 'ruim' %}
+                                    Ruim
+                                {% else %}
+                                    Péssima
+                                {% endif %}
+                            </td>
+                            <td>{{ dado_outro.entorno.variavel_entorno }}</td>
+                            <td>
+                                {% if dado_outro.risco == 'A' %}
+                                    Alto
+                                {% elif dado_outro.risco == 'M' %}
+                                    Médio
+                                {% else %}
+                                    Baixo
+                                {% endif %}
+                            </td>
+                            <td>{{ dado_outro.solucao_sugerida }}</td>
+                            <td>
+                                <input type="hidden" id="{{ dado_outro.id }}" value="{{ dado_outro.nome }}"/>
+                                <a class="cursorPointer copiar" onclick="copiar({{ dado_outro.id }});">
+                                    <i class="ui copy blue large icon"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td>Não há dados cadastrados.</td>
+                    </tr>
+                {% endif %}
+
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th colspan="7">
+                        <div class="ui right floated pagination secondary menu">
+                            {% if dados_outros.has_previous %}
+                                <a href="?outros={{ dados_outros.previous_page_number }}" class="icon item">
+                                    <i class="left chevron icon"></i>
+                                </a>
+                            {% endif %}
+                            <a class="item">Página {{ dados_outros.number }} de {{ dados_outros.paginator.num_pages }}</a>
+                            {% if dados_outros.has_next %}
+                                <a href="?outros={{ dados_outros.next_page_number }}" class="icon item">
+                                    <i class="right chevron icon"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
     </article>
-
-
 
     {% include 'caso/modalAdicionarCaso.html' %}
     {% include 'caso/modalEditarCaso.html' %}
     {% include 'caso/modalExcluirCaso.html' %}
+    {% include 'modal/modalPublico.html' %}
+    {% include 'modal/modalCopiar.html' %}
+
 
 {% endblock %}

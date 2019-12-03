@@ -14,7 +14,7 @@ def populate():
 
     add_substancia(nome="Oxigênio Dissolvido")
     add_substancia(nome="Coliformes Termotolerantes")
-    add_substancia(nome="Potencial Hidrogênico - pH")
+    add_substancia(nome="Potencial Hidrogênico (pH)")
     add_substancia(nome="DBO 5.20")
     add_substancia(nome="Temperatura da Água")
     add_substancia(nome="Nitrogênio Total")
@@ -32,7 +32,7 @@ def populate():
     add_substancia(nome="Surfactantes")
     add_substancia(nome="Zinco")
     add_substancia(nome="PFHTM")
-    add_substancia(nome="Número de Células Cianobactérias")
+    add_substancia(nome="Núm de Células Cianobactérias")
     add_substancia(nome="Manganês")
     add_substancia(nome="Alumínio Dissolvido")
     add_substancia(nome="Clorofila")

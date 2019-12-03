@@ -1,125 +1,168 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 {% load staticfiles %}
-{% block 'conteudo' %}
+{% block conteudo %}
     <div class="two wide column"></div>
 
-    <!--======================= FIM MENU VERTICAL ESQUERDO ============================== -->
-    <!--================================================================================= -->
-
-    <!--======================= CONTEÚDO PRINCIPAL [MEIO] ============================== -->
-    <!--================================================================================ -->
     <article class="twelve wide column">
 
         <div class="ui one column centered grid">
 
             <div class="column">
+                <div class="row">
 
+                    <nav class="ui text stackable menu">
+                        <h2 class="ui header">
+                            Imagens
+                        </h2>
+                    </nav>
+                </div>
+                <table class="ui striped celled unstackable table">
+                    <thead>
+                    <tr>
+                        <th class="no-sort" colspan="5">
+                            <div class="ui teal ribbon large label">Lista de Imagens</div>
+                            <button class="ui right floated teal ribbon labeled large botaoUpload icon button adicionarImagem">
+                                <i class="icon add"></i>
+                                Adicionar Nova Imagem
+                            </button>
+                        </th>
+                    </tr>
+                    </thead>
+                </table>
+                <div class="ui top attached tabular menu">
+                    <div class="active item" data-tab="first">Minhas Imagens</div>
+                </div>
 
-                <article class="ui center aligned basic segment">
-                    <button class="ui labeled large botaoUpload icon button adicionarImagem">
-                        <i class="icon add"></i>
-                        Adicionar Nova Imagem
-                    </button>
-                    <div class="ui divider"></div>
-
+                <div class="ui tab tabular attached bottom segment active"
+                     data-tab="first">
                     <form class="ui large form">
-                        <div class="two fields">
+                        <div class="four fields">
                             <div class="field">
                                 <label>Selecionar Bacia Hidrográfica</label>
-                                <select onchange="img_bacia_para_rio()" class="ui search dropdown" id="bh_pes">
-                                    <option value="selecione">Escolha uma bacia hidrográfica</option>
+                                <select onchange="bacia_para_rio()" class="ui search dropdown" name="bh"
+                                        id="bhModalColeta">
+                                    <option value="selecione">Escolha uma bacia</option>
                                     {% for bh in bhs %}
                                         <option value="{{ bh.id }}">{{ bh.nome }}</option>
                                     {% endfor %}
                                 </select>
                             </div>
-
                             <div class="field">
                                 <label>Selecionar Rio</label>
-                                <select onchange="imagem_pesquisar()" name="rio_pes" id="rio_pes" disabled="True">
-                                    <option>Escolha primeiro uma Bacia Hidrográfica</option>
+                                <select onchange="rio_para_ponto()" name="rio" id="rioModalColeta" disabled="True">
+                                    <option>Escolha primeiro uma bacia</option>
                                 </select>
                             </div>
-                            {#                            <div class="field">#}
-                            {#                                <label>Pesquisar por nome</label>#}
-                            {#                                <div class="ui left icon action input">#}
-                            {#                                    <i class="search icon"></i>#}
-                            {#                                    <input type="text">#}
-                            {#                                    <div class="ui grey submit grey button">Buscar</div>#}
-                            {#                                </div>#}
-                            {#                            </div>#}
+                            <div class="field">
+                                <label>Selecionar Ponto</label>
+                                <select onchange="ponto_para_coleta()" name="ponto"
+                                        id="ponto_monitoramentoModal"
+                                        disabled="True" required="True">
+                                    <option value="selecione">Selecione primeiro um rio</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label>Selecionar Coleta</label>
+                                <select onchange="enviar()" name="coleta" id="coletaImagem" disabled="True"
+                                        required="True">
+                                    <option value="selecione">Selecione primeiro um ponto</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="ui botaoUpload button buscar botao" disabled>
+                                <i class="icon search"></i>
+                            </button>
                         </div>
-
-
                     </form>
+                    <article class="ui centered cards" id="div_img">
+                        {% if dados %}
+                            {% for dado in dados %}
 
-
-                </article>
-
-                <article class="ui centered cards" id="div_img">
-                    {% if imgs %}
-                        {% for img in imgs %}
-
-                            <div class="ui card">
-                                <div class="image">
-                                    <img src="/media/{{ img.imagem }}">
-                                </div>
-                                <div class="content">
-                                    <a class="header">{{ img.titulo }}</a>
-                                    <div class="item">
-                                        {{ img.rio }}
+                                <div class="ui card">
+                                    <div class="image">
+                                        <img src="/media/{{ dado.imagem }}">
                                     </div>
-                                    <div class="item">
-                                        {{ img.ponto_monitoramento }}
-                                    </div>
-                                    <div class="meta">
-                                        <span class="date">{{ img.data_emissao }}</span>
-                                    </div>
-                                    <div class="ui divided list">
+                                    <div class="content">
+                                        <a class="header">{{ dado.titulo }}</a>
                                         <div class="item">
-                                            <a class="cursorPointer excluirImagem" onclick="img_excluir({{ img.id }});">
-                                                <i class="ui trash red large icon"></i>
-                                            </a>
+                                            {{ dado.rio }}
+                                        </div>
+                                        <div class="item">
+                                            ({{ dado.ponto_monitoramento.latitude }} ; {{ dado.ponto_monitoramento.longitude }}
+                                        </div>
+                                        <div class="meta">
+                                            <span class="date">{{ dado.data_emissao }}</span>
+                                        </div>
+                                        <div class="ui divided list">
+                                            <div class="item">
+                                                <a class="cursorPointer editarImagem"
+                                                   onclick="img_editar({{ dado.id }});">
+                                                    <i class="ui write grey large icon"></i>
+                                                </a>
+                                                <a class="cursorPointer excluirImagem"
+                                                   onclick="img_excluir({{ dado.id }});">
+                                                    <i class="ui trash red large icon"></i>
+                                                </a>
+                                                <td class="collapsing center aligned">
+                                                    {% if dado.publico %}
+                                                        <div class="ui fitted toggle checkbox visualizacao tooltip"
+                                                             data-tooltip="Público" data-position="top center"
+                                                             onclick="publico({{ dado.id }})">
+                                                            <i class="ui eye green large icon"></i>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="ui fitted toggle checkbox visualizacao tooltip"
+                                                             data-tooltip="Privado" data-position="top center"
+                                                             onclick="publico({{ dado.id }})">
+                                                            <i class="ui eye slash outline large icon"></i>
+                                                        </div>
+                                                    {% endif %}
+                                                </td>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        Não há imagens cadastradas.
-                    {% endif %}
+                            {% endfor %}
+                            <table class="ui striped celled unstackable table">
+                                <tfoot>
+                                <tr>
+                                    <th colspan="10">
+                                        <div class="ui right floated pagination secondary menu" id="page">
+                                            {% if dados.has_previous %}
+                                                <a href="?coleta={{ coleta_id }}&page={{ dados.previous_page_number }}" class="icon item">
+                                                    <i class="left chevron icon"></i>
+                                                </a>
+                                            {% endif %}
+                                            <a class="item">Página {{ dados.number }} de {{ dados.paginator.num_pages }}</a>
+                                            {% if dados.has_next %}
+                                                <a href="?coleta={{ coleta_id }}&page={{ dados.next_page_number }}" class="icon item">
+                                                    <i class="right chevron icon"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                    </th>
+                                </tr>
+                                </tfoot>
+                            </table>
+                        {% else  %}
+                            {% if get %}
+                                Não há dados.
+                            {% endif %}
+                        {% endif %}
+                    </article>
 
-
-                </article>
-
-                {#                <nav class="ui pagination secondary menu">#}
-                {#                    <a class="icon item">#}
-                {#                        <i class="left chevron icon"></i>#}
-                {#                    </a>#}
-                {#                    <a class="active item">1</a>#}
-                {#                    <a class="item">2</a>#}
-                {#                    <a class="item">3</a>#}
-                {#                    <a class="item">4</a>#}
-                {#                    <a class="icon item">#}
-                {#                        <i class="right chevron icon"></i>#}
-                {#                    </a>#}
-                {#                </nav>#}
-
-
-            </div>
-
-        </div>
-
+                </div>
 
     </article>
 
     <div class="two wide column"></div>
 
     {% include 'imagem/modalAdicionarImagem.html' %}
+    {% include 'imagem/modalEditarImagem.html' %}
     {% include 'imagem/modalExcluirImagem.html' %}
+    {% include 'modal/modalPublico.html' %}
+    {% include 'modal/modalCopiar.html' %}
 {% endblock %}

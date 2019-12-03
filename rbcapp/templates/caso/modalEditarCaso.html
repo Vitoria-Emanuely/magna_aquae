@@ -1,56 +1,92 @@
 <div class="ui modal modalEditarCaso">
     <i class="close icon"></i>
     <div class="header">
-        <i class="ui add small teal inverted circular icon"></i> Editar Rio
+        <i class="ui add small teal inverted circular icon"></i> Editar Caso
     </div>
 
-    <form method="POST" action="{% url 'rio_edit' %}" class="ui content form">
+    <form method="POST" action="{% url 'caso_edit' %}" class="ui content form">
 
         {% csrf_token %}
 
-        <div class="field">
-            <label>Nome do Rio</label>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Classificação IAP
+                    <div class="ui icon button tooltip"
+                         data-tooltip="Índice de Qualidade da Água Bruta para fins de Abastecimento Público"
+                         data-position="top left"
+                         data-inverted="">
+                        <i class="question circle icon"></i>
+                    </div>
+                </label>
 
+                <div class="ui corner labeled input">
+                    <input type="text" name="iap" id="iap" required disabled="True">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Classificação IVA
+                    <div class="ui icon button tooltip" data-tooltip="Índice de Proteção da Vida Aquática"
+                         data-position="top center"
+                         data-inverted="">
+                        <i class="question circle icon"></i>
+                    </div>
+                </label>
+                <div class="ui corner labeled input">
+                    <input type="text" name="iva" id="iva" required disabled="True">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Entorno</label>
+                <div class="ui corner labeled input">
+                    <input type="text" name="variavel_entorno" id="variavel_entorno" required disabled="True">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Risco</label>
+                <div class="ui corner labeled input">
+                    <input type="text" name="risco" id="risco" required disabled="True">
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="field space">
+            <label>Solução Sugerida</label>
             <div class="ui corner labeled input">
-                <input type="text" name="nome" id="nome_rio" required>
+                <textarea class="form-control" cols="40" id="solucao" name="solucao" rows="10" required>
+
+                </textarea>
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>
             </div>
-
         </div>
 
-        <div class="field">
-            <label>Dimensão</label>
-
-            <div class="ui corner labeled input">
-                <input type="text" name="dimensao" id="dimensao_rio" required>
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="field">
-            <label>Bacia Hidrográfica</label>
-
-            <div class="ui corner labeled input">
-                <input type="text" name="bacia_hidrografica" id="bh_rio" required disabled="True">
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
-                </div>
-            </div>
-
-        </div>
-        <input type="hidden" name="rio_id" id="id_rio"/>
+        <input type="hidden" name="caso_id" id="id_caso"/>
+        <input type="hidden" name="page" id="page"/>
+        <input type="hidden" name="bacia" id="bacia"/>
 
         <div class="actions">
             <div class="ui deny button">
                 Cancelar
             </div>
             <input type="submit" class="ui right teal button" value="Editar"/>
-        </input>
         </div>
     </form>
 

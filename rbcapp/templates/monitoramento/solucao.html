@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
-{% block 'conteudo' %}
+{% block conteudo %}
 
     <div class="two wide column"></div>
 
@@ -18,24 +18,24 @@
 
             <div class="column">
                 <header class="ui ordered fluid tablet stackable steps">
-                    <div class="completed step">
+                    <a class="completed step" href="{% url 'monitoramento_localizacao' %}">
                         <div class="content">
                             <div class="title">Selecionar Localização</div>
                             <div class="description">Bacia, Rio, Ponto e Coleta</div>
                         </div>
-                    </div>
-                    <div class="completed step">
+                    </a>
+                    <a class="completed step" href="{% url 'monitoramento_imagem' coleta=monitoramento.coleta_id %}">
                         <div class="content">
                             <div class="title">Selecionar Imagem</div>
                             <div class="description">Imagem referente a localização</div>
                         </div>
-                    </div>
-                    <div class="completed step">
+                    </a>
+                    <a class="completed step" href="#" onClick="javascript:history.go(-1);">
                         <div class="content">
                             <div class="title">Selecionar Entorno</div>
                             <div class="description">Entorno de acordo com a imagem</div>
                         </div>
-                    </div>
+                    </a>
 
                     <div class="active step">
                         <div class="content">
@@ -71,8 +71,8 @@
                         <tbody>
                         <tr>
                             <td>{{ rio }}</td>
-                            <td>{{ monitoramento.ponto_monitoramento }}</td>
-                            <td>{{ entorno }}</td>
+                            <td>({{ monitoramento.ponto_monitoramento.latitude }} ; {{ monitoramento.ponto_monitoramento.longitude }})</td>
+                            <td>{{ entorno.variavel_entorno }}</td>
                             <td>{{ monitoramento.data_monitoramento }}</td>
                         </tr>
                         </tbody>
@@ -84,16 +84,18 @@
                         </tfoot>
                     </table>
 
+                <div class="scroll">
                     <table class="ui striped celled unstackable table">
                         <thead>
                         <tr>
-                            <th class="no-sort" colspan="4">
+                            <th class="no-sort" colspan="5">
                                 <div class="ui teal ribbon large label">Casos</div>
                             </th>
                         </tr>
                         <tr>
                             <th>Risco</th>
                             <th>Solução</th>
+                            <th>Similaridade</th>
                             <th class="collapsing center aligned" colspan="2">Utilizar solução</th>
                         </tr>
                         </thead>
@@ -102,26 +104,28 @@
                             {% for resultado in resultados %}
                                 <tr>
                                     <td>
-                                        {% if resultado.2 == 'A' %}
+                                        {% if resultado.risco == 'A' %}
                                             Alto
-                                        {% elif resultado.2 == 'M' %}
+                                        {% elif resultado.risco == 'M' %}
                                             Médio
                                         {% else %}
                                             Baixo
                                         {% endif %}
                                     </td>
                                     <td>
-                                        {{ resultado.1 }}
+                                        {{ resultado.solucao_sugerida }}
                                     </td>
+                                    <td>{{ resultado.similaridade }}%</td>
                                     <td>
                                         <a class="cursorPointer utilizarSolucao"
-                                           onclick="monitoramento_solucao({{ resultado.0 }})">
+                                        onclick="monitoramento_solucao({{ resultado.id_caso }});">
                                             <i class="ui checkmark green large icon"></i>
+                                                {% include 'monitoramento/modalUtilizarSolucao.html' %}
                                         </a>
                                     </td>
                                     <td>
                                         <a class="cursorPointer editarSolucao"
-                                           onclick="monitoramento_editar({{ resultado.0 }});">
+                                           onclick="monitoramento_editar({{ resultado.id_caso }});">
                                             <i class="ui write grey large icon"></i>
                                         </a>
                                     </td>
@@ -142,11 +146,12 @@
                         </tbody>
                         <tfoot>
                         <tr>
-                            <th colspan="4">
+                            <th colspan="5">
                             </th>
                         </tr>
                         </tfoot>
                     </table>
+                </div>
                 </article>
 
                 <div class="two ui buttons">
@@ -155,21 +160,10 @@
                         Voltar
                     </a>
 
-                    <button class="ui right labeled icon botaoProximo button botao" disabled>
-                        <a href="/historico/">
-                            <i class="right arrow icon"></i>
-                            Histórico da paisagem
-                        </a>
-                    </button>
-
                 </div>
-
-
 
     </article>
 
     {% include 'monitoramento/modalEditarSolucao.html' %}
-    {% include 'monitoramento/modalUtilizarSolucao.html' %}
     {% include 'monitoramento/modalAdicionarSolucao.html' %}
-
 {% endblock %}

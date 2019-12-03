@@ -1,0 +1,68 @@
+<div class="ui modal modalEditarUsuario">
+    <i class="close icon"></i>
+    <div class="header">
+        <i class="ui user small teal inverted circular icon"></i> Edite suas informações!
+    </div>
+
+    <form method="POST" action="{% url 'usuario_edit' %}" class="ui content form">
+
+        {% csrf_token %}
+
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Nome</label>
+                <div class="ui corner labeled input eight wide">
+                    <input type="text" name="nome" value="{{ request.user.first_name }}" required>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Sobrenome</label>
+                <div class="ui corner labeled input">
+                    <input type="text" name="last_name" value="{{ request.user.last_name }}" required>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>E-mail</label>
+                <div class="ui corner labeled input">
+                    <input type="email" name="email" value="{{ request.user.email }}" required>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Usuário</label>
+                {% if request.user.username.errors %}
+                    <div class="ui negative message"><i class="close icon"></i> {{ request.user.username.errors }}</div>
+                {% endif %}
+                <div class="ui corner labeled input">
+                    <input type="text" name="username" value="{{ request.user.username }}" required>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ui grid">
+            <div class="actions space">
+                <div class="ui deny button">
+                    Cancelar
+                </div>
+                <input class="ui right teal button" type="submit" value="Editar"/>
+            </div>
+        </div>
+        <input type="hidden" name="usuario_id"/>
+    </form>
+
+</div>

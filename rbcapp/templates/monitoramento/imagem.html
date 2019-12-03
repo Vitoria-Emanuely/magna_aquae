@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 {% load staticfiles %}
-{% block 'conteudo' %}
+{% block conteudo %}
     <div class="two wide column"></div>
 
     <!--======================= FIM MENU VERTICAL ESQUERDO ============================== -->
@@ -18,7 +18,7 @@
 
             <div class="column">
                 <header class="ui ordered fluid tablet stackable steps">
-                    <a class="completed step">
+                    <a class="completed step" href="{% url 'monitoramento_localizacao' %}">
                         <div class="content">
                             <div class="title">Selecionar Localização</div>
                             <div class="description">Bacia, Rio, Ponto e Coleta</div>
@@ -64,6 +64,7 @@
                 </article>
                 <form action="{% url 'monitoramento_entorno' %}" method="GET">
                     {% csrf_token %}
+
                     <article class="ui centered cards">
                         {% for img in imgs %}
 
@@ -79,15 +80,15 @@
                                     </div>
                                 </div>
                                 <a class="ui green bottom attached button" id="img{{ img.id }}"
-                                   onclick="monitoramento_imagem({{ img.id }});enviar()" >
+                                   onclick="monitoramento_imagem({{ img.id }}, {{ coleta.id }});enviar()">
                                     <i class="add icon"></i>
                                     Selecionar imagem
                                 </a>
                             </div>
                         {% endfor %}
                     </article>
-                    <input type="hidden" name="monitoramento" value="{{ monitoramento.id }}"/>
-                    <input type="hidden" name="imagem" id="imagem"><br>
+                    <input type="hidden" name="imagem" id="imagem">
+
                     <div class="two ui buttons">
                         <a href="{% url 'monitoramento_localizacao' %}" class="ui left labeled icon secundary button">
                             <i class="left arrow icon"></i>
@@ -100,11 +101,9 @@
                         </button>
                     </div>
                 </form>
-
             </div>
 
         </div>
-
 
     </article>
     {% include 'monitoramento/modalAdicionarImagem.html' %}

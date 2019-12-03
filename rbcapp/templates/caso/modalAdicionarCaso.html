@@ -10,7 +10,15 @@
 
         <div class="ui grid">
             <div class="field eight wide">
-                <label>Classificação IAP</label>
+                <label>Classificação IAP
+                    <div class="ui icon button tooltip"
+                         data-tooltip="Índice de Qualidade da Água Bruta para fins de Abastecimento Público"
+                         data-position="top left"
+                         data-inverted="">
+                        <i class="question circle icon"></i>
+                    </div>
+                </label>
+
                 <div class="ui corner labeled input">
                     {{ form.iap }}
                     <div class="ui corner label">
@@ -20,7 +28,13 @@
             </div>
 
             <div class="field eight wide">
-                <label>Classificação IVA</label>
+                <label>Classificação IVA
+                    <div class="ui icon button tooltip" data-tooltip="Índice de Proteção da Vida Aquática"
+                         data-position="top center"
+                         data-inverted="">
+                        <i class="question circle icon"></i>
+                    </div>
+                </label>
                 <div class="ui corner labeled input">
                     {{ form.iva }}
                     <div class="ui corner label">
@@ -34,7 +48,12 @@
             <div class="field eight wide">
                 <label>Entorno</label>
                 <div class="ui corner labeled input">
-                    {{ form.entorno }}
+                    <select name="entorno">
+                        <option value="selecione">Selecione uma variável de entorno</option>
+                        {% for entorno in entornos %}
+                            <option value="{{ entorno.id }}">{{ entorno.variavel_entorno }}</option>
+                        {% endfor %}
+                    </select>
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
                     </div>

@@ -1,11 +1,12 @@
 # coding: utf-8
 
-from rbcapp.models import Entorno, Monitoramento
+from rbcapp.models import Entorno
 from django import forms
 
 
 class FormCaso(forms.Form):
     classificacoes = (
+        ('', 'Selecione uma classificação'),
         ('otima', 'Ótima'),
         ('boa', 'Boa'),
         ('regular', 'Regular'),
@@ -17,7 +18,7 @@ class FormCaso(forms.Form):
         widget=forms.Select(
             attrs={'class': 'form-control'}
         ),
-        choices=classificacoes
+        choices=classificacoes,
     )
 
     iva = forms.ChoiceField(
@@ -39,7 +40,7 @@ class FormCaso(forms.Form):
         widget=forms.Select(
             attrs={'class': 'form-control'}
         ),
-        choices=(('B', 'Baixo'), ('M', 'Médio'), ('A', 'Alto'))
+        choices=(('', 'Selecione uma classificação'), ('B', 'Baixo'), ('M', 'Médio'), ('A', 'Alto'))
     )
 
     solucao_sugerida = forms.CharField(

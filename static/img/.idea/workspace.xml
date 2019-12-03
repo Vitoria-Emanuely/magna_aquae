@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="e3257251-dfc5-4083-97ed-1ec26656f7d4" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../rbcapp/templates/historico/pontos.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalEditarUsuario.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/../../db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../magna_aquae/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../magna_aquae/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../magna_aquae/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../magna_aquae/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../populate_substancias.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../populate_substancias.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/models/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/models/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/models/monitoramento.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/models/monitoramento.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/acessarConta.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/acessarConta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/bacia_hidrografica/modalAdicionarBacia.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/bacia_hidrografica/modalAdicionarBacia.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/bacia_hidrografica/modalEditarBacia.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/bacia_hidrografica/modalEditarBacia.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/caso/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/caso/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/caso/modalAdicionarCaso.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/caso/modalAdicionarCaso.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/coleta/modalAdicionarColeta.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/coleta/modalAdicionarColeta.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/historico/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/historico/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/imagem/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/imagem/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/menu/menuPaginaInicial.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/menu/menuPaginaInicial.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/menu/menuPrincipal.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/menu/menuPrincipal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/menu/menuVertical.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/menu/menuVertical.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalCadastro.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalCadastro.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalCadastroOkay.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalCadastroOkay.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalSobre.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/modal/modalSobre.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/monitoramento/localizacao.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/monitoramento/localizacao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/monitoramento/modalAdicionarSolucao.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/monitoramento/modalAdicionarSolucao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/monitoramento/solucao.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/monitoramento/solucao.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/ponto/modalAdicionarPonto.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/ponto/modalAdicionarPonto.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/rio/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/rio/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/rio/modalAdicionarRio.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/rio/modalAdicionarRio.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/templates/rio/modalEditarRio.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/templates/rio/modalEditarRio.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/bacia_hidrografica.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/bacia_hidrografica.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/coleta.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/coleta.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/historico.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/historico.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/imagem.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/imagem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/index.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/index.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/monitoramento.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/monitoramento.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/ponto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/ponto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/rio.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/rio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../rbcapp/views/usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../rbcapp/views/usuario.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../css/estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/../css/estilo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/ajax.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/ajax.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/script.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1346" />
+    <option name="height" value="688" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="e3257251-dfc5-4083-97ed-1ec26656f7d4" name="Default Changelist" comment="" />
+      <created>1561460495010</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561460495010</updated>
+      <workItem from="1561460496228" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="8000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="67" y="25" width="1533" height="875" extended-state="6" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24949563" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+</project>

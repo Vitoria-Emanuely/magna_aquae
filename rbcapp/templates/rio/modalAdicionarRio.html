@@ -5,15 +5,16 @@
     </div>
 
     <form method="POST" action="{% url 'rio_add' %}" class="ui content form">
+        <input type="hidden" name="diferencial" value="{{ diferencial }}">
 
         {% csrf_token %}
 
         <div class="ui grid">
             <div class="field ten wide">
                 <label>Nome do Rio</label>
-                {{ form.nome.errors }}
+                {{ formRio.nome.errors }}
                 <div class="ui corner labeled input">
-                    {{ form.nome }}
+                    {{ formRio.nome }}
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
                     </div>
@@ -22,9 +23,9 @@
 
             <div class="field six wide">
                 <label>Dimensão</label>
-                {{ form.dimensao.errors }}
+                {{ formRio.dimensao.errors }}
                 <div class="ui corner labeled input">
-                    {{ form.dimensao }}
+                    {{ formRio.dimensao }}
                     <div class="ui corner label">
                         <i class="asterisk icon"></i>
                     </div>
@@ -34,9 +35,13 @@
 
         <div class="field space">
             <label>Bacia Hidrográfica</label>
-            {{ form.bacia_hidrografic.errors }}
             <div class="ui corner labeled input">
-                {{ form.bacia_hidrografica }}
+                <select onchange="bacia_para_rio()" name="bacia_hidrografica" id="bhModal">
+                    <option value="selecione">Selecione uma bacia hidrográfica</option>
+                    {% for bh in bhs %}
+                        <option value="{{ bh.id }}">{{ bh.nome }}</option>
+                    {% endfor %}
+                </select>
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>

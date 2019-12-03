@@ -2,11 +2,11 @@
 
 {% load staticfiles %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPrincipal.html' %}
 {% endblock %}
 
-{% block 'conteudo' %}
+{% block conteudo %}
 
     <div class="two wide column"></div>
 
@@ -15,50 +15,59 @@
         <h3 class="ui huge center aligned icon header">
             <i class="user arvore circular icon"></i>
             <div class="content">
-                {{ user.first_name }} {{ user.last_name }}
                 <div class="sub header">@{{ user.username }}</div>
-                <div class="sub header">Membro desde {{ user.date_joined }}</div>
-                <h2>Informações</h2>
+                <div class="sub header space">Membro desde {{ user.date_joined }}</div>
+                <h2>Informações Pessoais</h2>
             </div>
         </h3>
 
+        <div class="ui secondary very padded segment grid">
+            <div class="five wide column header word2"><label><h3>Nome:</h3></label>
+                <div class="header word"> {{ user.first_name }}</div>
+            </div>
+            <div class="five wide column header word2"><label><h3>Sobrenome:</h3></label>
+                <div class="header word">{{ user.last_name }}</div>
+            </div>
+            <div class="five wide column header word2"><label><h3>Email:</h3></label>
+                <div class="header word"> {{ user.email }}</div>
+            </div>
+            <button class="right floated ui labeled botaoUpload icon button editarUsuario">
+                <i class="ui write large icon"></i>
+                Editar informações
+            </button>
+        </div>
+
         <div class="ui secondary very padded segment">
-            <div class="ui header"><label>Nome:</label> {{ user.first_name }} {{ user.last_name }}</div>
-            <div class="ui header"><label>Email:</label> {{ user.email }}</div>
-            <h2>Alterar senha</h2>
-            <form method="POST" action="{% url 'acessar_conta' %}" class="ui large form">
+            <div class="content"><h3>Alterar senha</h3></div>
+            <div class="ui large form">
                 {% csrf_token %}
                 {% if erro %}
-                    <div class="ui negative message"><i class="close icon"></i> {{ erro }} </div>
-                {% elif senha %}
-                    <div class="ui positive message"><i class="close icon"></i> {{ senha }} </div>
+                    <div class="ui negative message centralizar"><i class="close icon"></i> {{ erro }} </div>
                 {% endif %}
                 <div class="equal width fields">
                     <div class="field">
                         <label>Senha</label>
-                        <input type="password" name="senha" required>
+                        <input type="password" name="senha" id="alterarSenha" required>
                     </div>
 
                     <div class="field">
                         <label>Digite a senha novamente</label>
-                        <input type="password" name="senha2" required>
-
+                        <input type="password" name="senha2" required onchange="checarSenha()">
                     </div>
                 </div>
-
-
-                <div class="ui fluid buttons">
-                    <a href="{% url 'index' %}" class="ui button">Voltar</a>
-                    <button class="ui botaoUpload button" type="submit">Alterar senha</button>
-
+                <div class="actions">
+                    <a href="{% url 'index' %}" class="ui deny button">Voltar</a>
+                    <button class="ui right teal button botaoUpload editarSenha" id="alterar" onclick="senhaAntiga()" disabled>Alterar senha</button>
                 </div>
         </div>
 
-        </form>
+        </div>
 
         </div>
 
 
     </article>
 
+    {% include 'modal/modalEditarUsuario.html' %}
+    {% include 'modal/modalEditarSenha.html' %}
 {% endblock %}

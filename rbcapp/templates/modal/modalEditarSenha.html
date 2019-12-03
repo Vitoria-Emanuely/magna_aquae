@@ -1,0 +1,33 @@
+<div class="ui modal modalEditarSenha">
+    <i class="close icon"></i>
+    <div class="header">
+        <i class="ui user small teal inverted circular icon"></i> Alteração de senha
+    </div>
+<form method="POST" action="{% url 'acessar_conta' %}" class="ui content form">
+    {% csrf_token %}
+    <div class="ui grid">
+        <div class="field ten wide">
+            <label>Digite sua senha atual</label>
+            <div class="ui corner labeled input eight wide">
+                <input type="password" name="senhaAtual" required>
+                <div class="ui corner label">
+                    <i class="asterisk icon"></i>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <input type="hidden" name="senha" id="senha"/>
+        <input type="hidden" name="senha2" id="senha2"/>
+
+    <div class="ui grid space">
+        <div class="actions space">
+            <div class="ui deny button">
+                Cancelar
+            </div>
+            <input class="ui right teal button" type="submit" value="Editar"/>
+        </div>
+    </div>
+</form>
+
+</div>

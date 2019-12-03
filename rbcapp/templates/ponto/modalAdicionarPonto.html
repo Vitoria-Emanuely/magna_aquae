@@ -5,6 +5,7 @@
     </div>
 
     <form method="POST" action="{% url 'ponto_add' %}" class="ui content form">
+        <input type="hidden" name="diferencial" value="{{ diferencial }}">
 
         {% csrf_token %}
 
@@ -32,34 +33,36 @@
             </div>
         </div>
 
-        <div class="field space">
-            <label>Bacia Hidrográfica</label>
-            <div class="ui corner labeled input">
-                <select onchange="bacia_para_rio()" name="bh" id="bh">
-                    <option value="selecione">Selecione uma bacia hidrografica</option>
-                    {% for bh in bhs %}
-                        <option value="{{ bh.id }}">{{ bh.nome }}</option>
-                    {% endfor %}
-                </select>
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Bacia Hidrográfica</label>
+                <div class="ui corner labeled input">
+                    <select onchange="bacia_para_rio()" name="bh" id="bhModalPonto">
+                        <option value="selecione">Selecione uma bacia hidrográfica</option>
+                        {% for bh in bhs %}
+                            <option value="{{ bh.id }}">{{ bh.nome }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Rio</label>
+                <div class="ui corner labeled input">
+                    <select name="rio" id="rioModalPonto" disabled="True">
+                        <option>Selecione primeiro uma bacia hidrográfica</option>
+                    </select>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="field">
-            <label>Rio</label>
-            <div class="ui corner labeled input">
-                <select name="rio" id="rio" disabled="True">
-                    <option>Selecione primeiro uma bacia hidrográica</option>
-                </select>
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
-                </div>
-            </div>
-        </div>
-
-        <div class="actions">
+        <div class="actions space">
             <div class="ui deny button">
                 Cancelar
             </div>

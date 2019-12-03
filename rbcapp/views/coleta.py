@@ -1,5 +1,6 @@
 # coding: utf-8
 
+from django.contrib.auth.models import User
 from rbcapp.models import Coleta, Substancia, Ponto_Monitoramento, Monitoramento, Rio, Bacia_Hidrografica, \
     Coleta_Substancia
 from rbcapp.forms.coleta import FormColeta
@@ -9,15 +10,16 @@ from django.core import serializers
 from django.db import connection
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime
+
 
 class Coleta_Listar(View):
-    template = 'coleta/index.html'
-
     def get(self, request):
-        rios = Rio.objects.all()
-        bhs = Bacia_Hidrografica.objects.all()
+        usuario = User.objects.get(username=request.user)
+        rios = Rio.objects.filter(id_usuario=usuario)
+        bhs = Bacia_Hidrografica.objects.filter(id_usuario=usuario)
         subs = Substancia.objects.all()
-        coletas = Coleta.objects.all()
+        coletas = Coleta.objects.filter(id_usuario=usuario)
         col = []
         for coleta in coletas:
             sbs = {}
@@ -38,14 +40,9 @@ class Coleta_Listar(View):
         except EmptyPage:
             dados = paginator.page(paginator.num_pages)
 
-        return render(request, self.template, {'dados': dados, 'rios': rios, 'bhs': bhs, 'substancias': subs})
+        return render(request, 'coleta/index.html', {'dados': dados, 'rios': rios, 'bhs': bhs, 'substancias': subs,
+                                                     'data_max': datetime.now().strftime('%Y-%m-%d')})
 
-    def post(self, request):
-        rio = request.POST['rio']
-        pts = Ponto_Monitoramento.objects.filter(rio=rio)
-        coletas = Coleta.objects.filter(ponto_monitoramento=pts)
-        json = serializers.serialize('json', coletas)
-        return HttpResponse(json)
 
 class Coleta_Info(View):
     def get(self, request):
@@ -64,19 +61,12 @@ class Coleta_Info(View):
 
 
 class Coleta_Add(View):
-    template = 'coleta/'
-
-    def get(self, request):
-        self.template += 'add.html'
-        form = FormColeta()
-        return render(request, self.template,
-                      {'form': form, 'bhs': Bacia_Hidrografica.objects.all(), 'substancias': Substancia.objects.all()})
-
     def post(self, request):
+        usuario = User.objects.get(username=request.user)
         substancias = request.POST.getlist('substancia')
         valores_coletados = request.POST.getlist('valor_coletado')
-
         coleta = Coleta()
+        coleta.id_usuario = usuario
         coleta.data_coleta = request.POST['data_coleta']
         coleta.ponto_monitoramento = Ponto_Monitoramento.objects.get(pk=request.POST['ponto'])
         coleta.save()
@@ -89,9 +79,10 @@ class Coleta_Add(View):
             coleta_substancia.save()
 
         monitoramento = Monitoramento()
-        monitoramento.data_monitoramento = request.POST['data_coleta']
+        monitoramento.data_monitoramento = datetime.now()
         monitoramento.ponto_monitoramento = Ponto_Monitoramento.objects.get(pk=request.POST['ponto'])
         monitoramento.coleta = coleta
+        monitoramento.id_usuario = usuario
         monitoramento.save()
 
         calculo = Monitoramento.objects.get(pk=monitoramento.id)
@@ -101,18 +92,15 @@ class Coleta_Add(View):
 
         if "mon" in request.POST:
             return redirect('monitoramento_imagem', coleta= coleta.id)
+        elif request.POST['diferencial'] == "null":
+            return redirect('monitoramento_localizacao')
+        else:
+            return redirect('coleta_listar')
 
-        return redirect('coleta_listar')
 
 class Coleta_Delete(View):
     def get(self, request, coleta_id=None):
         coleta = Coleta.objects.get(pk=coleta_id)
         if coleta.id != None:
-            coleta.delete()
-        return redirect('coleta_listar')
-
-    def post(self, request, coleta_id=None):
-        coleta = Coleta.objects.get(pk=coleta_id)
-        if coleta.id != None:
-            coleta.delete()
+            self.delete = coleta.delete()
         return redirect('coleta_listar')

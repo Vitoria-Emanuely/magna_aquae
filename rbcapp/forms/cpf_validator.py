@@ -61,7 +61,7 @@ class CPF(object):
         [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0]
         (1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 0) """
 
-        if isinstance(cpf, basestring):
+        if isinstance(cpf, str):
             if not cpf.isdigit():
                 cpf = self._translate(cpf)
 
@@ -86,7 +86,7 @@ class CPF(object):
 
         d = iter("..-")
         s = map(str, self.cpf)
-        for i in xrange(3, 12, 4):
+        for i in range(3, 12, 4):
             s.insert(i, d.next())
         r = ''.join(s)
         return r

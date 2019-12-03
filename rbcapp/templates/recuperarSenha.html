@@ -1,89 +1,72 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPaginaInicial.html' %}
 {% endblock %}
 
-{% block 'conteudo' %}
+{% block conteudo %}
 
     <div class="two wide column"></div>
-    <article class="twelve wide column">
+    <article class="twelve wide column organize">
 
-        <nav class="ui text stackable menu">
-            <h2 class="ui header">
-                Recuperar senha
-            </h2>
-        </nav>
-        <div class="row">
-            {% if senha %}
-                <form method="POST" action="{% url 'recuperar_senha' %}" class="ui large form">
+        <div class="row ui segment">
+
+            <nav class="ui text stackable menu centro">
+                <h2 class="ui header">
+                    Recuperar Senha
+                </h2>
+            </nav>
+
+            <form method="POST" action="{% url 'recuperar_senha_email' %}" class="ui content form" onsubmit="
+            if(form_being_submitted) {
+                alert('Envio em andamento, aguarde um instante ...');
+                recuperar.disabled = true;
+                return false;
+            }
+            if(checkForm(this)) {
+                recuperar.value = 'Enviando email ...';
+                form_being_submitted = true;
+                return true;
+            }
+            return false;">
                 {% csrf_token %}
-                {% if senha_erro %}
-                    <div class="ui negative message"><i class="close icon"></i> {{ senha_erro }} </div>
-                {% endif %}
-                <div class="equal width fields">
-                    <div class="field">
-                        <label>Senha</label>
-                        <input type="password" name="senha" required>
+                {% if erro %}
+                    <div class="ui negative message centralizar"><i class="close icon"></i>
+                        <div class="header">Email incorreto ou não existente!</div>
+                        <p>Por favor, verifique-o e tente novamente.</p>
                     </div>
-
-                    <div class="field">
-                        <label>Digite a senha novamente</label>
-                        <input type="password" name="senha2" required>
-
-                    </div>
-                </div>
-                <input type="hidden" name="username" value="{{ us.username }}"/>
-                <div class="ui fluid buttons">
-                    <a href="{% url 'index' %}" class="ui button">Cancelar</a>
-                    <button class="ui botaoUpload button" type="submit">Alterar senha</button>
-
-                </div>
-            {% elif login %}
-                <a href="#" class="ui positive message"><i class="close icon"></i>A senha foi alterado com
-                    sucesso!</a><br><br>
-                <div class="actions">
-                    <a href="{% url 'index' %}" class="ui cancel button">Voltar</a>
-                    <a class="ui right teal button acessarConta">Entrar</a>
-                    </a>
-                </div>
-            {% else %}
-
-                <form method="GET" action="{% url 'recuperar_senha' %}" class="ui content form">
-                    <div class="field">
-                        <label>Pergunta de segurança</label>
-
-                        <div class="ui corner labeled input">
-                            {{ us.pergunta }}
+                {% elif sucesso %}
+                    <div class="ui positive message centralizar">
+                        <i class="close icon"></i>
+                        <div class="header">
+                            Email enviado com sucesso!
                         </div>
+                        <p>Por favor, verifique sua caixa de entrada</p>
                     </div>
-                    <div class="field">
+                {% endif %}
 
-                        {% if erro %}
-                            <div class="ui negative message"><i class="close icon"></i> Resposta errada! Tente
-                                novamente.
-                            </div>
-                        {% endif %}
-                        <label>Resposta</label>
-
+                <div class="ui grid space centro">
+                    <div class="field eight wide">
+                        <label>Email</label>
                         <div class="ui corner labeled input">
-                            <input type="text" maxlength="20" name="resposta"/>
+                            {{ form.email }}
                             <div class="ui corner label">
                                 <i class="asterisk icon"></i>
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" name="username" value="{{ us.username }}"/>
-                    <div class="actions">
-                        <a href="{% url 'index' %}" class="ui cancel button">Cancelar</a>
-                        <button class="ui right teal button">Recuperar</button>
-                        </a>
-                    </div>
-                </form>
+                </div>
 
+                <div class="actions space_recuperar centro">
+                    <a class="ui deny button" href="{% url 'index' %}">
+                        Voltar
+                    </a>
+                    <input type="submit" class="ui right teal button" value="Recuperar Senha" name="recuperar"/>
+                </div>
 
-            {% endif %}
         </div>
+
+        </form>
     </article>
 
     {% include 'modal/modalAcessarConta.html' %}

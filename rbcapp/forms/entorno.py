@@ -15,7 +15,3 @@ class FormEntorno(forms.Form):
             attrs={'class': 'form-control'}
         )
     )
-
-
-
-

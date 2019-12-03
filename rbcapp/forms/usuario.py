@@ -1,15 +1,15 @@
 # coding:utf-8
-from datetime import datetime
+
 from django import forms
-from cpf_validator import CPF
+from .cpf_validator import CPF
 from rbcapp.models import Usuario
 
 
 class UsuarioForm(forms.ModelForm):
-    
     cpf = forms.CharField(
         widget=forms.TextInput(
-            attrs={'required': 'True', 'pattern': '(\\d+\\.?)+', 'title': 'Apenas números.', 'minlength': 11,'maxlength':11, 'placeholder': 'Apenas números'}
+            attrs={'required': 'True', 'pattern': '(\\d+\\.?)+', 'title': 'Apenas números.', 'minlength': 11,
+                   'maxlength': 11, 'placeholder': 'Apenas números'}
         )
     )
 
@@ -21,7 +21,7 @@ class UsuarioForm(forms.ModelForm):
 
     email = forms.EmailField(
         widget=forms.EmailInput(
-            attrs={'required': 'True'}
+            attrs={'required': 'True', 'placeholder': 'exemplo@exemplo.com'}
         )
     )
 
@@ -49,22 +49,9 @@ class UsuarioForm(forms.ModelForm):
         )
     )
 
-    pergunta = forms.CharField(
-        widget=forms.TextInput(
-            attrs={'required': 'True'}
-        )
-    )
-
-    resposta = forms.CharField(
-        widget=forms.TextInput(
-            attrs={'required': 'True'}
-        )
-    )
-
     class Meta:
         model = Usuario
-        exclude = ('date_joined', 'is_staff', 'user_permissions', 'groups', 'last_login', 'is_superuser',
-        'is_active')
+        exclude = ('date_joined', 'is_staff', 'user_permissions', 'groups', 'last_login', 'is_superuser', 'is_active')
 
     def clean_cpf(self):
         cpf = self.cleaned_data.get('cpf')
@@ -72,8 +59,6 @@ class UsuarioForm(forms.ModelForm):
             return cpf
         else:
             raise forms.ValidationError("CPF inválido.")
-
-
 
     def save(self, commit=True):
         user = super(UsuarioForm, self).save(commit=False)

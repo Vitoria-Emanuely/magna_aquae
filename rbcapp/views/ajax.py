@@ -1,10 +1,10 @@
 # coding: utf-8
 
 from rbcapp.models import Rio, Ponto_Monitoramento, Coleta, Casos
-from rbcapp.forms.caso import FormCaso
 from django.shortcuts import HttpResponse
 from django.views.generic.base import View
 from django.core import serializers
+
 
 class Ajax_Pesquisa(View):
     def get(self, request):
@@ -26,6 +26,3 @@ class Ajax_Pesquisa(View):
             caso = Casos.objects.filter(id=request.GET['caso'])
             json = serializers.serialize("json", caso)
             return HttpResponse(json)
-
-    def post(self, request):
-        pass

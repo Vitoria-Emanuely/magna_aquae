@@ -17,7 +17,7 @@ O projeto desenvolvido no Núcleo de Operacionalização e Desenvolvimento de Si
 
 ### Instalação
 
-É necessário possuir Python 2.7 e PIP instalados.
+É necessário possuir Python 3 e PIP instalados.
 
 Para instalar as dependências do projeto, é necessário executar o comando:
 
@@ -25,6 +25,8 @@ Para instalar as dependências do projeto, é necessário executar o comando:
 $ pip install -r requirements.txt
 $ python manage.py makemigrations
 $ python manage.py migrate
+$ python populate_entornos.py
+$ python populate_substancias.py
 ```
 
 Para executar, basta executar o comando:

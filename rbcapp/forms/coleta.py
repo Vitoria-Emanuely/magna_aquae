@@ -1,6 +1,6 @@
 # coding: utf-8
 
-from rbcapp.models import Ponto_Monitoramento, Substancia
+from rbcapp.models import Ponto_Monitoramento
 from django import forms
 
 
@@ -24,6 +24,7 @@ class FormColeta(forms.Form):
             attrs={'class': 'form-control'}
         )
     )
+
 
 class FormColetaPesquisar(forms.Form):
     data_coleta = forms.DateField(

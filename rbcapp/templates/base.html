@@ -9,20 +9,22 @@
     <link rel="stylesheet" href="{% static 'css/semantic/semantic.min.css' %}">
     <link rel="stylesheet" href="{% static 'owl/owl.carousel.css' %}">
     <link rel="stylesheet" href="{% static 'owl/owl.theme.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}">
+
 </head>
 
 <body>
 <!--======================= MENU ============================== -->
 
 
-  {% block 'menu' %}{% endblock %}
+  {% block menu %}{% endblock %}
 
 
 <!--======================= FIM MENU ============================== -->
 <!--======================= CONTEÚDO ============================== -->
 
 <section class="ui stackable grid conteudo">
-    {% block 'conteudo' %}{% endblock %}
+    {% block conteudo %}{% endblock %}
 </section>
 
 <!--======================= FIM CONTEÚDO ==========================-->

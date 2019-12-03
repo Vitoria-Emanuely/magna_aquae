@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block menu %}
+    {% include 'menu/menuPaginaInicial.html' %}
+{% endblock %}
+
+{% block conteudo %}
+
+    <div class="two wide column"></div>
+    <article class="twelve wide column organize">
+
+        <div class="row ui segment">
+
+            <nav class="ui text stackable menu centro">
+                <h2 class="ui header">
+                    Redefinir Senha
+                </h2>
+            </nav>
+
+            <form method="POST" action="{% url 'redefinir_senha' codigo=codigo.codigo %}" class="ui content form">
+                {% csrf_token %}
+                {% if erro %}
+                    <div class="ui negative message centralizar"><i class="close icon"></i>
+                        <div class="header">{{ erro }}</div>
+                        <p>Por favor, verifique-as e tente novamente.</p>
+                    </div>
+                {% endif %}
+
+                <div class="ui grid space centro">
+                    <div class="field eight wide">
+                        <label>Senha</label>
+                        <div class="ui corner labeled input">
+                            {{ form.password }}
+                            <div class="ui corner label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field eight wide">
+                        <label>Confirmar Senha</label>
+                        <div class="ui corner labeled input">
+                            {{ form.password_check }}
+                            <div class="ui corner label">
+                                <i class="asterisk icon"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" value="{{ codigo }}" name="codigo"/>
+                <div class="actions space_recuperar centro">
+                    <a class="ui deny button" href="{% url 'recuperar_senha' %}">
+                        Voltar
+                    </a>
+                    <input type="submit" class="ui right teal button" value="Redefinir Senha"/>
+                </div>
+
+        </div>
+
+        </form>
+    </article>
+
+    {% include 'modal/modalAcessarConta.html' %}
+
+{% endblock %}
+

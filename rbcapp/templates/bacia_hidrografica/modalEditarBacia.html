@@ -1,7 +1,7 @@
 <div class="ui modal modalEditarBacia">
     <i class="close icon"></i>
     <div class="header">
-        <i class="ui add small teal inverted circular icon"></i> Editar Bacia Hidrogarifca
+        <i class="ui add small teal inverted circular icon"></i> Editar Bacia Hidrográfica
     </div>
 
     <form method="POST" action="{% url 'bacia_hidrografica_edit' %}" class="ui content form">
@@ -21,6 +21,8 @@
         </div>
 
         <input type="hidden" name="bh_id" id="id_bh"/>
+        <input type="hidden" name="page" id="page"/>
+        <input type="hidden" name="bacia" id="bacia"/>
 
         <div class="actions">
             <div class="ui deny button">

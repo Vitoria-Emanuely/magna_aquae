@@ -35,16 +35,17 @@
             </div>
 
         </div>
+
         <input type="hidden" name="monitoramento" value="{{ monitoramento.id }}"/>
         <input type="hidden" name="entorno" value="{{ entorno.id }}"/>
         <input type="hidden" name="imagem" value="{{ img }}"/>
-        <input type="hidden" name="caso_id" id="caso"/>
+        <input type="hidden" name="caso_id" id="caso" value/>
 
         <div class="actions">
             <div class="ui deny button">
                 Cancelar
             </div>
-            <input type="submit" class="ui right teal button" value="Adicionar e Utilizar"/>
+            <input type="submit" name="cadastrar_caso" class="ui right teal button" value="Adicionar e Utilizar"/>
             </input>
         </div>
     </form>

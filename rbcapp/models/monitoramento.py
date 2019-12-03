@@ -1,17 +1,19 @@
-#coding: utf-8
+# coding: utf-8
 
 from django.db import models
 import math
-from ponto_monitoramento import Ponto_Monitoramento
-from coleta import Coleta
-from entorno import Entorno
-from imagem import Imagem
+from .ponto_monitoramento import Ponto_Monitoramento
+from .coleta import Coleta
+from .entorno import Entorno
+from .imagem import Imagem
 from django.db import connection
+from .user import User
 
 
 class Monitoramento(models.Model):
     data_monitoramento = models.DateField('Data do Monitoramento')
     ponto_monitoramento = models.ForeignKey(Ponto_Monitoramento)
+    id_usuario = models.ForeignKey(User, null=False)
     coleta = models.ForeignKey(Coleta)
     imagem = models.ForeignKey(Imagem, blank=True, null=True)
     entorno = models.ForeignKey(Entorno, blank=True, null=True)
@@ -19,7 +21,6 @@ class Monitoramento(models.Model):
     classificacao_iva = models.CharField(max_length=45, null=True)
     risco = models.CharField(max_length=1, null=True)
     solucao_sugerida = models.TextField(null=True)
-    
 
     def _get_valor_coletado_substancia(self, nome_substancia):
         sql = ''' select rbcapp_monitoramento.id, nome, valor_coletado
@@ -38,29 +39,29 @@ class Monitoramento(models.Model):
 
     def _get_valores_iqa(self):
         return {
-            'oxigenio_dissolvido': self._get_od(self._get_valor_coletado_substancia('Oxigenio Dissolvido')),
+            'oxigenio_dissolvido': self._get_od(self._get_valor_coletado_substancia('Oxigênio Dissolvido')),
             'coliformes_termotolerantes': self._get_cf(
                 self._get_valor_coletado_substancia('Coliformes Termotolerantes')),
-            'ph': self._get_ph(self._get_valor_coletado_substancia('Potencial Hidrogenico - pH')),
+            'ph': self._get_ph(self._get_valor_coletado_substancia('Potencial Hidrogênico (pH)')),
             'dbo_520': self._get_dbo(self._get_valor_coletado_substancia('DBO 5.20')),
-            'temperatura': self._get_temperatura(self._get_valor_coletado_substancia('Temperatura da Agua')),
-            'nitrogenio_total': self._get_nitrogenio_total(self._get_valor_coletado_substancia('Nitrogenio Total')),
-            'fosforo_total': self._get_fosforo_total(self._get_valor_coletado_substancia('Fosforo Total')),
-            'residuo_total': self._get_residuo_total(self._get_valor_coletado_substancia('Residuo Total')),
+            'temperatura': self._get_temperatura(self._get_valor_coletado_substancia('Temperatura da Água')),
+            'nitrogenio_total': self._get_nitrogenio_total(self._get_valor_coletado_substancia('Nitrogênio Total')),
+            'fosforo_total': self._get_fosforo_total(self._get_valor_coletado_substancia('Fósforo Total')),
+            'residuo_total': self._get_residuo_total(self._get_valor_coletado_substancia('Resíduo Total')),
             'turbidez': self._get_residuo_total(self._get_valor_coletado_substancia('Turbidez'))
         }
 
     def _get_valores_st_ipmca(self):
         return {
-            'cadmio': self._get_ponderacao_ipmca_cadmio(self._get_valor_coletado_substancia('Cadmio')),
+            'cadmio': self._get_ponderacao_ipmca_cadmio(self._get_valor_coletado_substancia('Cádmio')),
             'cromo': self._get_ponderacao_ipmca_cromo(self._get_valor_coletado_substancia('Cromo Total')),
             'cobre_dissolvido': self._get_ponderacao_ipmca_cobre_dissolvido(
                 self._get_valor_coletado_substancia('Cobre Dissolvido')),
             'chumbo': self._get_ponderacao_ipmca_chumbo_total(self._get_valor_coletado_substancia('Chumbo')),
-            'mercurio': self._get_ponderacao_ipmca_mercurio(self._get_valor_coletado_substancia('Mercurio')),
-            'niquel': self._get_ponderacao_ipmca_niquel(self._get_valor_coletado_substancia('Niquel')),
+            'mercurio': self._get_ponderacao_ipmca_mercurio(self._get_valor_coletado_substancia('Mercúrio')),
+            'niquel': self._get_ponderacao_ipmca_niquel(self._get_valor_coletado_substancia('Níquel')),
             'fenois_totais': self._get_ponderacao_ipmca_fenois_totais(
-                self._get_valor_coletado_substancia('Fenois Totais')),
+                self._get_valor_coletado_substancia('Fenóis Totais')),
             'surfactantes': self._get_ponderacao_ipmca_surfactantes(
                 self._get_valor_coletado_substancia('Surfactantes')),
             'zinco': self._get_ponderacao_ipmca_zinco(self._get_valor_coletado_substancia('Zinco'))
@@ -68,33 +69,33 @@ class Monitoramento(models.Model):
 
     def _get_valores_ipmca_ve(self):
         return {
-            'od': self._get_ponderacao_ipmca_od(self._get_valor_coletado_substancia('Oxigenio Dissolvido')),
-            'ph': self._get_ponderecao_ipmca_ph(self._get_valor_coletado_substancia('Potencial Hidrogenico - pH'))
+            'od': self._get_ponderacao_ipmca_od(self._get_valor_coletado_substancia('Oxigênio Dissolvido')),
+            'ph': self._get_ponderecao_ipmca_ph(self._get_valor_coletado_substancia('Potencial Hidrogênico (pH)'))
         }
 
     def _get_valores_st_isto(self):
         return {
             'pfhtm': self._get_valor_coletado_substancia('PFHTM'),
-            'numero_celulas': self._get_valor_coletado_substancia('Numero de Celulas Cianobacterias'),
-            'cadmio': self._get_valor_coletado_substancia('Cadmio'),
+            'numero_celulas': self._get_valor_coletado_substancia('Núm de Células Cianobactérias'),
+            'cadmio': self._get_valor_coletado_substancia('Cádmio'),
             'chumbo': self._get_valor_coletado_substancia('Chumbo'),
             'cromo': self._get_valor_coletado_substancia('Cromo Total'),
-            'mercurio': self._get_valor_coletado_substancia('Mercurio'),
-            'niquel': self._get_valor_coletado_substancia('Niquel')
+            'mercurio': self._get_valor_coletado_substancia('Mercúrio'),
+            'niquel': self._get_valor_coletado_substancia('Níquel')
         }
 
     def _get_valores_so_isto(self):
         return {
             'ferro_dissolvido': self._get_valor_coletado_substancia('Ferro Dissolvido'),
-            'manganes': self._get_valor_coletado_substancia('Manganes'),
-            'aluminio_dissolvido': self._get_valor_coletado_substancia('Aluminio Dissolvido'),
+            'manganes': self._get_valor_coletado_substancia('Manganês'),
+            'aluminio_dissolvido': self._get_valor_coletado_substancia('Alumínio Dissolvido'),
             'cobre_dissolvido': self._get_valor_coletado_substancia('Cobre Dissolvido'),
             'zinco': self._get_valor_coletado_substancia('Zinco')
         }
 
     def _get_valores_iet(self):
         return {
-            'fosforo': self._get_valor_coletado_substancia('Fosforo Total'),
+            'fosforo': self._get_valor_coletado_substancia('Fósforo Total'),
             'clorofila': self._get_valor_coletado_substancia('Clorofila'),
         }
 
@@ -207,7 +208,7 @@ class Monitoramento(models.Model):
 
     def _get_media_tres_maiores_ponderacoes(self):
         substancias = self._get_valores_st_ipmca()
-        maximo1, maximo2, maximo3 = substancias.values(), substancias.values(), substancias.values()
+        maximo1, maximo2, maximo3 = list(substancias.values()), list(substancias.values()), list(substancias.values())
         maximo1 = max(maximo1)
         maximo2.remove(maximo1)
         maximo2 = max(maximo2)
@@ -218,8 +219,8 @@ class Monitoramento(models.Model):
 
     def _get_multipliacao_minimos_st(self):
         st = self._get_valores_st_isto()
-        minimo1 = min(st.values())
-        minimo2 = st.values()
+        minimo1 = min(list(st.values()))
+        minimo2 = list(st.values())
         minimo2.remove(minimo1)
         minimo2 = min(minimo2)
         return minimo1 * minimo2
@@ -231,13 +232,13 @@ class Monitoramento(models.Model):
 
     def _get_od(self, oxigenio_dissolvido):
         if oxigenio_dissolvido > 140:
-            return 47.0;
+            return 47.0
         else:
             return oxigenio_dissolvido
 
     def _get_cf(self, ct):
         if ct > 100000:
-            return 3.0;
+            return 3.0
         else:
             return ct
 
@@ -349,4 +350,5 @@ class Monitoramento(models.Model):
 
     def __unicode__(self):
         return unicode(self.data_monitoramento) + ' | (' + str(self.ponto_monitoramento.latitude) + ', ' + str(
-            self.ponto_monitoramento.longitude) + ') | ' + 'IAP: ' + self.classificacao_iap + ' - ' + 'IVA:' + self.classificacao_iva
+            self.ponto_monitoramento.longitude) + ') | ' + 'IAP: ' + self.classificacao_iap + ' - ' + 'IVA:' + \
+               self.classificacao_iva

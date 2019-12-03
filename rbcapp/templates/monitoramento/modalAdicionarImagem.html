@@ -22,7 +22,7 @@
             <label>Data de emissão</label>
 
             <div class="ui corner labeled input">
-                <input type="date" name="data_emissao" required>
+                <input type="date" name="data_emissao" max="{{ data_max }}" required>
                 <div class="ui corner label">
                     <i class="asterisk icon"></i>
                 </div>
@@ -37,7 +37,8 @@
                         class="ui cloud upload icon"></i><span>Fazer upload da imagem</span></label>
             </div>
         </div>
-        <input type="hidden" name="monitoramento" value="{{ monitoramento.id }}"/>
+        <input type="hidden" name="coleta" value="{{ coleta.id }}"/>
+        <input type="hidden" name="ponto" value="{{ coleta.ponto_monitoramento.id }}"/>
         <div class="actions">
             <div class="ui deny button">
                 Cancelar

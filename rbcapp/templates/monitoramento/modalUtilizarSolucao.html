@@ -7,7 +7,7 @@
         <form method="POST" action="{% url 'monitoramento_solucao' %}">
             {% csrf_token %}
             <input type="hidden" name="monitoramento" value="{{ monitoramento.id }}"/>
-            <input type="hidden" name="caso" id="caso"/>
+            <input type="hidden" name="caso_id" id="caso"/>
             <input type="hidden" name="entorno" value="{{ entorno.id }}"/>
             <input type="hidden" name="imagem" value="{{ img }}"/>
             <div class="ui deny button">Cancelar</div>

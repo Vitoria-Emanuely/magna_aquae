@@ -11,30 +11,31 @@
                 <a class="item"  href="/">
                     <img src="{% static  'img/magna-aqua-logo.png' %}" id="logo">
                 </a>
-                <a class="item" href="{% url 'bacia_hidrografica_listar' %}">
+                <a class="item {% if request.path == "/bacia-hidrografica/" or request.path == "/rio/" or request.path == "/ponto/" or request.path == "/coleta/" %}active {% endif %}" href="{% url 'bacia_hidrografica_listar' %}">
                     Bacias Hidrográficas
                 </a>
-                <a class="item" href="{% url 'entorno_listar' %}">
+                <a class="item {% if request.path == "/entorno/"  %}active {% endif %}" href="{% url 'entorno_listar' %}">
                     Entornos
                 </a>
-                <a class="item" href="{% url 'imagem_listar' %}">
+                <a class="item {% if request.path == "/imagem/"  %}active {% endif %}" href="{% url 'imagem_listar' %}">
                     Imagens
                 </a>
-                <a class="item" href="{% url 'caso_listar' %}">
+                <a class="item {% if request.path == "/caso/"  %}active {% endif %}" href="{% url 'caso_listar' %}">
                     Casos
                 </a>
-                <a class="item" href="{% url 'monitoramento_localizacao' %}">
+                <a class="item {% if request.path == "/monitoramento/localizacao/" %}active {% endif %}" href="{% url 'monitoramento_localizacao' %}">
                     Monitoramento
                 </a>
-                <a class="item" href="{% url 'historico_listar' %}">
+                <a class="item {% if request.path == "/historico/"%}active {% endif %} {% if request.path == "/historico/detalhes/" %}active {% endif %}" href="{% url 'historico_selecionar' %}">
                     Histórico
                 </a>
+
                 <div class="right menu">
                     <div class="ui simple dropdown item">
                         Olá {{ user.first_name }}!
                         <i class="dropdown icon"></i>
                         <div class="menu">
-                            <a href="/acessarConta/" class="item">Acessar Conta</a>
+                            <a href="{% url 'acessar_conta' %}" class="item">Acessar Conta</a>
                             <a href="{% url 'logout' %}" class="item">Sair</a>
                         </div>
                     </div>
@@ -53,27 +54,27 @@
                     <a class="item" href="{% url 'bacia_hidrografica_listar' %}">
                         Bacias Hidrográficas
                     </a>
-                    <a class="item" href="/rios/">
+                    <a class="item" href="{% url 'rio_listar' %}">
                         Rios
                     </a>
-                    <a class="item" href="/entornos/">
+                    <a class="item" href="{% url 'entorno_listar' %}">
                         Entornos
                     </a>
-                    <a class="item" href="/imagens/">
+                    <a class="item" href="{% url 'imagem_listar' %}">
                         Imagens
                     </a>
-                    <a class="item">
+                    <a class="item" href="{% url 'caso_listar' %}">
                         Casos
                     </a>
-                    <a class="item" href="/monitoramento/">
+                    <a class="item" href="{% url 'monitoramento_localizacao' %}">
                         Monitoramento
                     </a>
-                    <a class="item" href="/historico/">
+                    <a class="item" href="{% url 'historico_selecionar' %}">
                         Histórico
                     </a>
                     <div class="divider"></div>
-                    <a href="/acessarConta/" class="item">Acessar Conta</a>
-                    <div href="{% url 'logout' %}" class="item"> Sair  </div>
+                    <a href="{% url 'acessar_conta' %}" class="item">Acessar Conta</a>
+                    <a href="{% url 'logout' %}" class="item"> Sair  </a>
                 </div>
             </div>
             <div class="item">

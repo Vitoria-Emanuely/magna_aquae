@@ -5,6 +5,7 @@
     </div>
 
     <form method="POST" action="{% url 'entorno_add' %}" class="ui content form">
+        <input type="hidden" name="diferencial" value="{{ diferencial }}">
         {% csrf_token %}
         <div class="fields">
             <div class="fifteen wide field">
@@ -24,13 +25,16 @@
                 <input type="color" name="cor" required/>
             </div>
         </div>
-
+        <input type="hidden" name="entorno" id="entorno" onchange="monitoramento_entorno2();"/>
+        <input type="hidden" name="monitoramento" value="{{ monitoramento }}"/>
+        <input type="hidden" name="imagem" value="{{ img.id }}"/>
         <div class="actions">
             <div class="ui deny button">
                 Cancelar
             </div>
             <input type="submit" value="Cadastrar" class="ui right teal button"/>
         </div>
+
     </form>
 
 </div>

@@ -1,8 +1,9 @@
 # coding: utf-8
 
 from django.db import models
-from entorno import Entorno
-from monitoramento import Monitoramento
+from .entorno import Entorno
+from .monitoramento import Monitoramento
+
 
 class Solucao(models.Model):
     monitoramento = models.ForeignKey(Monitoramento)

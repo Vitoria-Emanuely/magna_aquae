@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block 'menu' %}
+{% block menu %}
     {% include 'menu/menuPaginaInicial.html' %}
 {% endblock %}
 
-{% block 'conteudo' %}
+{% block conteudo %}
 
     <div class="two wide column"></div>
     <article class="twelve wide column">
@@ -18,14 +18,13 @@
             </nav>
 
             <form method="POST" action="{% url 'login' %}" class="ui content form">
-
                 {% if erro %}
-                    <div class="ui negative message"><i class="close icon"></i>
+                    <div class="ui negative message centralizar"><i class="close icon"></i>
                         <div class="header">Usuário ou Senha incorretos!</div>
                         <p>Por favor, verifique os dados e tente novamente.</p>
                     </div>
                 {% else %}
-                    <div class="ui negative message">
+                    <div class="ui negative message centralizar">
                         <i class="close icon"></i>
                         <div class="header">
                             Você precisa estar logado para acessar o sistema!
@@ -34,8 +33,12 @@
                     </div>
                 {% endif %}
 
+                {% if senha %}
+                    <div class="ui positive message centralizar"><i class="close icon"></i> {{ senha }} </div>
+                {% endif %}
+
                 {% csrf_token %}
-                <div class="ui grid">
+                <div class="ui grid space">
                     <div class="field eight wide">
                         <label>Usuário</label>
                         <div class="ui corner labeled input">
@@ -57,13 +60,12 @@
                     </div>
                 </div>
 
-                <div class="actions">
+                <div class="actions space">
                     <div class="ui deny button">
                         Cancelar
                     </div>
                     <input type="submit" class="ui right teal button" value="Entrar"/>
-                    OU
-                    <a class="ui green large button botaoFacaParte cadastro">
+                    <a class="ui green button cadastro">
                         Cadastre-se!
                     </a>
                 </div>
@@ -71,9 +73,9 @@
             </form>
             <br>
             <div class="ui content">
-                <div class="ui segment esqueceuSenha recuperarSenha">
+                <div class="ui segment">
                     <i class="ui help inverted circular blue icon"></i>
-                    <a href="#">Esqueceu a senha?</a>
+                    <a href="{% url 'recuperar_senha' %}">Esqueceu a senha?</a>
                 </div>
             </div>
         </div>

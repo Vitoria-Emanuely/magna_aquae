@@ -32,19 +32,33 @@
             </div>
         </div>
 
-        <div class="field space">
-            <label>Rio</label>
-            <div class="ui corner labeled input">
-                <input name="rio" id="ponto_rio" disabled="True"/>
-                <div class="ui corner label">
-                    <i class="asterisk icon"></i>
+        <div class="ui grid">
+            <div class="field eight wide">
+                <label>Bacia Hidrográfica</label>
+                <div class="ui corner labeled input">
+                    <input name="bacia" id="ponto_bacia" disabled="True"/>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field eight wide">
+                <label>Rio</label>
+                <div class="ui corner labeled input">
+                    <input name="rio" id="ponto_rio" disabled="True"/>
+                    <div class="ui corner label">
+                        <i class="asterisk icon"></i>
+                    </div>
                 </div>
             </div>
         </div>
 
         <input type="hidden" name="ponto_id" id="id_ponto"/>
+        <input type="hidden" name="page" id="page"/>
+        <input type="hidden" name="bacia_h" id="bacia"/>
 
-        <div class="actions">
+        <div class="actions space">
             <div class="ui deny button">
                 Cancelar
             </div>
