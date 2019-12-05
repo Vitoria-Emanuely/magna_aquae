@@ -11,10 +11,13 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-import sys
-from importlib import reload
 
-reload(sys)
+import environ
+
+env = environ.Env()
+# reading .env file
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,12 +27,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tt-rl1e=t(a-$o-iy8_j@dy9+0ypaey#gy#dfcrb1+26z1!8%o'
+SECRET_KEY = env('SECRET_KEY', str, "unsafe-secret-key")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env("DEBUG", bool, True)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", list, ["127.0.0.1", "localhost"])
 
 
 # Application definition
@@ -81,10 +84,7 @@ WSGI_APPLICATION = 'magna_aquae.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': env.db('DATABASE_URL', default='sqlite:///db.sqlite3')
 }
 
 #DATABASES = {
@@ -134,6 +134,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, "all_static/")
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
 
